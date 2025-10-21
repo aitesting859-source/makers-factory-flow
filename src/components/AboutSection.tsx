@@ -11,7 +11,7 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section className={`relative min-h-screen px-4 py-32 blur-load ${isLoaded ? 'loaded' : ''}`}>
+    <section id="about" className={`relative min-h-screen px-4 py-32 blur-load ${isLoaded ? 'loaded' : ''}`}>
       <div className="max-w-7xl mx-auto">
         {/* Main Content */}
         <div className="relative z-10">

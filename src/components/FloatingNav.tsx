@@ -32,19 +32,26 @@ const FloatingNav = () => {
     { name: 'Fine Art Weddings', path: '/works/fine-art-weddings' },
   ];
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav
       className={`fixed top-8 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
         isVisible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'
       }`}
     >
-      <div className="bg-primary/10 backdrop-blur-md border border-primary/20 rounded-full px-8 py-3">
+      <div className="bg-primary/90 backdrop-blur-sm border border-background/20 rounded-sm px-8 py-4 shadow-lg">
         <ul className="flex items-center gap-8 text-sm font-bold tracking-wider">
           <li>
             <Link
               to="/"
-              className={`text-glow-hover transition-colors ${
-                location.pathname === '/' ? 'text-accent' : 'text-primary'
+              className={`transition-colors hover:text-accent ${
+                location.pathname === '/' ? 'text-accent' : 'text-background'
               }`}
             >
               HOME
@@ -54,7 +61,7 @@ const FloatingNav = () => {
           <li className="relative">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center gap-1 text-primary text-glow-hover transition-colors"
+              className="flex items-center gap-1 text-background hover:text-accent transition-colors"
               onMouseEnter={() => setIsDropdownOpen(true)}
             >
               WORKS
@@ -63,14 +70,14 @@ const FloatingNav = () => {
             
             {isDropdownOpen && (
               <div
-                className="absolute top-full left-0 mt-2 bg-background/95 backdrop-blur-md border border-primary/20 rounded-lg overflow-hidden min-w-[200px] shadow-lg"
+                className="absolute top-full left-0 mt-2 bg-primary/95 backdrop-blur-md border border-background/20 rounded-sm overflow-hidden min-w-[200px] shadow-lg"
                 onMouseLeave={() => setIsDropdownOpen(false)}
               >
                 {workItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className="block px-6 py-3 text-primary text-glow-hover hover:bg-primary/10 transition-colors text-sm"
+                    className="block px-6 py-3 text-background hover:text-accent hover:bg-background/10 transition-colors text-sm"
                     onClick={() => setIsDropdownOpen(false)}
                   >
                     {item.name}
@@ -78,6 +85,24 @@ const FloatingNav = () => {
                 ))}
               </div>
             )}
+          </li>
+
+          <li>
+            <button
+              onClick={() => scrollToSection('about')}
+              className="text-background hover:text-accent transition-colors"
+            >
+              ABOUT
+            </button>
+          </li>
+
+          <li>
+            <button
+              onClick={() => scrollToSection('contact')}
+              className="text-background hover:text-accent transition-colors"
+            >
+              CONTACT
+            </button>
           </li>
         </ul>
       </div>
