@@ -21,13 +21,18 @@ const Showreel = () => {
           isLoaded ? 'loaded' : ''
         }`}
       >
-        {/* Placeholder for showreel video */}
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-background">
-          <div className="text-center space-y-4">
-            <div className="w-20 h-20 mx-auto border-4 border-primary/30 border-t-accent rounded-full animate-spin" />
-            <p className="text-primary/50 text-sm tracking-wider">SHOWREEL LOADING</p>
-          </div>
-        </div>
+        {/* Showreel Video */}
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+          onLoadedData={() => setIsLoaded(true)}
+        >
+          <source src="/showreel.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         
         {/* Film Grain Overlay */}
         <div className="absolute inset-0 grain-overlay pointer-events-none" />
