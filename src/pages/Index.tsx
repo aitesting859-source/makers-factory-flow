@@ -1,12 +1,36 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import FloatingNav from '@/components/FloatingNav';
+import Showreel from '@/components/Showreel';
+import HeroText from '@/components/HeroText';
+import AboutSection from '@/components/AboutSection';
+import WorksSection from '@/components/WorksSection';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="relative min-h-screen bg-background">
+      {/* Grain Overlay */}
+      <div className="grain-overlay" />
+      
+      {/* Floating Navigation */}
+      <FloatingNav />
+      
+      {/* Main Content */}
+      <main className="relative z-10">
+        {/* Showreel Section */}
+        <Showreel />
+        
+        {/* Hero Text Section */}
+        <HeroText />
+        
+        {/* About Section */}
+        <AboutSection />
+        
+        {/* Works Section */}
+        <WorksSection />
+      </main>
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
