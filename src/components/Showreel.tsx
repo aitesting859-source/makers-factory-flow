@@ -1,17 +1,51 @@
 import { useEffect, useRef, useState } from 'react';
 import ShowreelParticles from './ShowreelParticles';
+import VideoControls from './VideoControls';
 
 const Showreel = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef<HTMLDivElement>(null);
+  const videoElementRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 300);
 
-    return () => clearTimeout(timer);
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
   }, []);
+
+  const handleToggleMute = () => {
+    if (videoElementRef.current) {
+      videoElementRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const handleToggleFullscreen = async () => {
+    if (!videoRef.current) return;
+
+    try {
+      if (!document.fullscreenElement) {
+        await videoRef.current.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (error) {
+      console.error('Fullscreen error:', error);
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 py-32">
@@ -30,6 +64,7 @@ const Showreel = () => {
       >
         {/* Showreel Video */}
         <video
+          ref={videoElementRef}
           className="w-full h-full object-cover"
           autoPlay
           loop
@@ -40,6 +75,14 @@ const Showreel = () => {
           <source src="/showreel.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        
+        {/* Video Controls */}
+        <VideoControls
+          isMuted={isMuted}
+          isFullscreen={isFullscreen}
+          onToggleMute={handleToggleMute}
+          onToggleFullscreen={handleToggleFullscreen}
+        />
         
         {/* Film Grain Overlay */}
         <div className="absolute inset-0 grain-overlay pointer-events-none" />
