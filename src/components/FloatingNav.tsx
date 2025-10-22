@@ -45,7 +45,7 @@ const FloatingNav = () => {
         isVisible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'
       }`}
     >
-      <div className="bg-primary/90 backdrop-blur-sm border border-background/20 rounded-sm px-8 py-4 shadow-lg">
+      <div className="bg-primary/70 backdrop-blur-sm border border-background/20 rounded-sm px-8 py-4 shadow-lg">
         <ul className="flex items-center gap-8 text-sm font-bold tracking-wider">
           <li>
             <Link

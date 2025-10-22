@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer id="contact" className="relative overflow-hidden bg-background border-t border-primary/20 py-16">
+    <footer id="contact" className="relative overflow-hidden bg-muted/30 backdrop-blur-sm border-t border-border/20 py-16">
       {/* Continuous Marquee Animation */}
       <div className="relative">
         <div className="flex animate-marquee whitespace-nowrap">

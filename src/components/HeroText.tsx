@@ -28,7 +28,7 @@ const HeroText = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 py-32"
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 py-32 border-t border-border/20"
       style={{ transform: `translateY(-${scrollY}px)` }}
     >
       {/* Main Hero Text */}

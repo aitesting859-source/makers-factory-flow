@@ -14,6 +14,9 @@ const Showreel = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 py-32">
+      {/* Grain Background Animation */}
+      <div className="absolute inset-0 grain-overlay opacity-30" />
+      
       {/* Showreel Container with 35mm Film Ratio (2.39:1) */}
       <div
         ref={videoRef}

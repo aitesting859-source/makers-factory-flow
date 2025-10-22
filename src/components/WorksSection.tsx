@@ -43,7 +43,7 @@ const WorksSection = () => {
   }, []);
 
   return (
-    <section className={`relative min-h-screen px-4 py-32 blur-load ${isLoaded ? 'loaded' : ''}`}>
+    <section className={`relative min-h-screen px-4 py-32 border-t border-border/20 blur-load ${isLoaded ? 'loaded' : ''}`}>
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl md:text-7xl font-black text-primary mb-20 tracking-tight text-center">
           OUR <span className="text-accent">WORKS</span>
