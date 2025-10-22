@@ -13,7 +13,7 @@ const ShowreelParticles = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const generatedParticles = Array.from({ length: 3500 }, (_, i) => ({
+    const generatedParticles = Array.from({ length: 1200 }, (_, i) => ({
       id: i,
       angle: Math.random() * 360,
       radius: Math.random() * 600 + 100,

@@ -5,19 +5,28 @@ const CustomCursor = () => {
   const [isPointer, setIsPointer] = useState(false);
 
   useEffect(() => {
+    let rafId: number;
+    
     const updatePosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      if (rafId) cancelAnimationFrame(rafId);
       
-      const target = e.target as HTMLElement;
-      setIsPointer(
-        window.getComputedStyle(target).cursor === 'pointer' ||
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON'
-      );
+      rafId = requestAnimationFrame(() => {
+        setPosition({ x: e.clientX, y: e.clientY });
+        
+        const target = e.target as HTMLElement;
+        setIsPointer(
+          window.getComputedStyle(target).cursor === 'pointer' ||
+          target.tagName === 'A' ||
+          target.tagName === 'BUTTON'
+        );
+      });
     };
 
     window.addEventListener('mousemove', updatePosition);
-    return () => window.removeEventListener('mousemove', updatePosition);
+    return () => {
+      window.removeEventListener('mousemove', updatePosition);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
