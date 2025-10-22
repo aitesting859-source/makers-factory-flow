@@ -18,14 +18,14 @@ const AboutSection = () => {
     <section id="about" className={`relative min-h-screen px-4 py-32 border-t border-border/20 bg-background/50 blur-load ${isLoaded ? 'loaded' : ''}`}>
       <div className="max-w-7xl mx-auto">
         {/* Main Content */}
-        <div className="relative z-10">
-          <h2 className="text-5xl md:text-7xl font-black text-primary mb-12 tracking-tight">
+        <div className="relative z-10 flex flex-col items-center">
+          <h2 className="text-5xl md:text-7xl font-black text-primary mb-12 tracking-tight text-center">
             CRAFTING VISUAL
             <br />
             <span className="text-accent">STORIES</span>
           </h2>
           
-          <div className="max-w-2xl space-y-6 text-primary/80 text-lg leading-relaxed">
+          <div className="max-w-2xl space-y-6 text-primary/80 text-lg leading-relaxed text-center">
             <p>
               We are a collective of indie creators pushing the boundaries of visual storytelling.
               From cinematic productions to intimate editorial work, we bring passion and precision

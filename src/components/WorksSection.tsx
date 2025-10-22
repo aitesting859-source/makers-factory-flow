@@ -66,7 +66,7 @@ const WorksSection = () => {
                 />
                 
                 {/* Content */}
-                <div className="relative z-10 h-full p-12 flex flex-col justify-end">
+                <div className="relative z-10 h-full p-12 flex flex-col justify-end items-center text-center">
                   <div className="space-y-3">
                     <h3 className="text-3xl md:text-4xl font-black text-primary group-hover:text-accent transition-colors tracking-tight">
                       {work.title}
