@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import ShowreelParticles from './ShowreelParticles';
 
 const Showreel = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -14,6 +15,9 @@ const Showreel = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 py-32">
+      {/* Orbital Particles */}
+      <ShowreelParticles />
+      
       {/* Grain Background Animation */}
       <div className="absolute inset-0 grain-overlay opacity-30" />
       
