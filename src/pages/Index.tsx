@@ -5,14 +5,10 @@ import AboutSection from '@/components/AboutSection';
 import WorksSection from '@/components/WorksSection';
 import Footer from '@/components/Footer';
 import StarField from '@/components/StarField';
-import CustomCursor from '@/components/CustomCursor';
 
 const Index = () => {
   return (
     <div className="relative min-h-screen bg-background">
-      {/* Custom Cursor */}
-      <CustomCursor />
-      
       {/* Star Field Background */}
       <StarField />
       
