@@ -6,16 +6,42 @@ import aboutCorner4 from '@/assets/about-corner-4.jpg';
 
 const AboutSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [blurAmount, setBlurAmount] = useState(10);
+  const sectionRef = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 300);
-    return () => clearTimeout(timer);
+
+    const handleScroll = () => {
+      const section = document.getElementById('about');
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          const progress = Math.max(0, Math.min(1, (windowHeight - rect.top) / (windowHeight * 0.5)));
+          setBlurAmount(10 * (1 - progress));
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
-    <section id="about" className={`relative min-h-screen px-4 py-32 border-t border-border/20 bg-background/50 blur-load ${isLoaded ? 'loaded' : ''}`}>
+    <section 
+      id="about" 
+      className={`relative min-h-screen px-4 py-32 border-t border-border/20 bg-background/50 blur-load ${isLoaded ? 'loaded' : ''}`}
+      style={{ filter: `blur(${blurAmount}px)`, transition: 'filter 0.3s ease-out' }}
+    >
       <div className="max-w-7xl mx-auto">
         {/* Main Content */}
         <div className="relative z-10 flex flex-col items-center">

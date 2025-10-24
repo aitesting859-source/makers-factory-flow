@@ -13,12 +13,12 @@ const ShowreelParticles = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const generatedParticles = Array.from({ length: 1200 }, (_, i) => ({
+    const generatedParticles = Array.from({ length: 1800 }, (_, i) => ({
       id: i,
       angle: Math.random() * 360,
       radius: Math.random() * 600 + 100,
       size: Math.random() * 2 + 0.5,
-      speed: Math.random() * 0.3 + 0.1,
+      speed: Math.random() * 0.15 + 0.05,
       opacity: Math.random() * 0.6 + 0.2,
     }));
     setParticles(generatedParticles);
@@ -37,7 +37,7 @@ const ShowreelParticles = () => {
             left: '50%',
             top: '50%',
             transform: `rotate(${particle.angle}deg) translate(${particle.radius}px) rotate(-${particle.angle}deg)`,
-            animation: `orbit ${30 / particle.speed}s linear infinite`,
+            animation: `orbit ${50 / particle.speed}s linear infinite`,
             animationDelay: `${-Math.random() * 30}s`,
           }}
         />

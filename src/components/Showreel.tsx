@@ -6,8 +6,10 @@ const Showreel = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [scrollOpacity, setScrollOpacity] = useState(1);
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -18,11 +20,23 @@ const Showreel = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
 
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const scrolled = window.scrollY;
+        const fadePoint = window.innerHeight * 3;
+        const opacity = Math.max(0, 1 - scrolled / fadePoint);
+        setScrollOpacity(opacity);
+      }
+    };
+
     document.addEventListener('fullscreenchange', handleFullscreenChange);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
 
     return () => {
       clearTimeout(timer);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -48,7 +62,11 @@ const Showreel = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 py-32">
+    <section 
+      ref={sectionRef}
+      className="relative min-h-screen flex items-center justify-center px-4 py-32"
+      style={{ opacity: scrollOpacity }}
+    >
       {/* Orbital Particles */}
       <ShowreelParticles />
       

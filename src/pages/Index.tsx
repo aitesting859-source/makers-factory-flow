@@ -1,5 +1,6 @@
 import FloatingNav from '@/components/FloatingNav';
 import Showreel from '@/components/Showreel';
+import ShowreelHeroText from '@/components/ShowreelHeroText';
 import HeroText from '@/components/HeroText';
 import AboutSection from '@/components/AboutSection';
 import WorksSection from '@/components/WorksSection';
@@ -22,6 +23,9 @@ const Index = () => {
       <main className="relative z-10">
         {/* Showreel Section */}
         <Showreel />
+        
+        {/* Showreel Hero Text */}
+        <ShowreelHeroText />
         
         {/* Hero Text Section */}
         <HeroText />

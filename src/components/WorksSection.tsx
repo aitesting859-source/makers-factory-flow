@@ -34,16 +34,40 @@ const works = [
 
 const WorksSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [blurAmount, setBlurAmount] = useState(10);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 300);
-    return () => clearTimeout(timer);
+
+    const handleScroll = () => {
+      const section = document.querySelector('section.blur-load');
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          const progress = Math.max(0, Math.min(1, (windowHeight - rect.top) / (windowHeight * 0.5)));
+          setBlurAmount(10 * (1 - progress));
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
-    <section className={`relative min-h-screen px-4 py-32 border-t border-border/20 blur-load ${isLoaded ? 'loaded' : ''}`}>
+    <section 
+      className={`relative min-h-screen px-4 py-32 border-t border-border/20 blur-load ${isLoaded ? 'loaded' : ''}`}
+      style={{ filter: `blur(${blurAmount}px)`, transition: 'filter 0.3s ease-out' }}
+    >
       <div className="max-w-7xl mx-auto">
         <h2 className="text-5xl md:text-7xl font-black text-primary mb-20 tracking-tight text-center">
           OUR <span className="text-accent">WORKS</span>
