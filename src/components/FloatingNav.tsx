@@ -58,7 +58,10 @@ const FloatingNav = () => {
             </Link>
           </li>
           
-          <li className="relative">
+          <li 
+            className="relative"
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               className="flex items-center gap-1 text-background hover:text-accent transition-colors"
@@ -70,8 +73,7 @@ const FloatingNav = () => {
             
             {isDropdownOpen && (
               <div
-                className="absolute top-full left-0 mt-2 bg-primary/95 backdrop-blur-md border border-background/20 rounded-sm overflow-hidden min-w-[200px] shadow-lg"
-                onMouseLeave={() => setIsDropdownOpen(false)}
+                className="absolute top-full left-0 mt-2 bg-primary/95 backdrop-blur-md border border-background/20 rounded-sm overflow-hidden min-w-[200px] shadow-lg z-50"
               >
                 {workItems.map((item) => (
                   <Link

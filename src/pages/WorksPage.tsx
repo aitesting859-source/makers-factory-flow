@@ -51,21 +51,21 @@ const WorksPage = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-20">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-primary mb-6 tracking-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-primary mb-6 tracking-tight transition-transform duration-300 hover:scale-105">
               {work.title.split(' ').map((word, i) => (
                 <span key={i} className={i === work.title.split(' ').length - 1 ? 'text-accent' : ''}>
                   {word}{' '}
                 </span>
               ))}
             </h1>
-            <p className="text-xl md:text-2xl text-primary/70 max-w-2xl tracking-wide">
+            <p className="text-xl md:text-2xl text-primary/70 max-w-2xl tracking-wide transition-transform duration-300 hover:scale-105">
               {work.description}
             </p>
           </div>
 
           {/* Content */}
           <div className="space-y-16">
-            <p className="text-lg text-primary/80 max-w-3xl leading-relaxed">
+            <p className="text-lg text-primary/80 max-w-3xl leading-relaxed transition-transform duration-300 hover:scale-105">
               {work.content}
             </p>
 

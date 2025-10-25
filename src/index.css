@@ -210,6 +210,15 @@ All colors MUST be HSL.
   background-color: hsl(var(--accent));
 }
 
+.magnify-icon {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: transform;
+}
+
 /* Orbital Particles */
 .orbital-particle {
   will-change: transform;

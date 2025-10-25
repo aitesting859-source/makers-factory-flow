@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { Search } from 'lucide-react';
+import { createRoot } from 'react-dom/client';
 
 const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -11,6 +13,12 @@ const CustomCursor = () => {
     const dot = dotRef.current;
     if (!cursor || !dot) return;
 
+    // Create magnifying glass icon
+    const magnifyIcon = document.createElement('div');
+    magnifyIcon.className = 'magnify-icon';
+    const iconRoot = createRoot(magnifyIcon);
+    iconRoot.render(<Search size={16} color="hsl(20, 89%, 54%)" />);
+
     const updateMousePosition = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
       
@@ -22,7 +30,24 @@ const CustomCursor = () => {
         target.tagName === 'A' ||
         target.tagName === 'BUTTON';
       
+      const isText = target.tagName === 'H1' || 
+        target.tagName === 'H2' || 
+        target.tagName === 'H3' || 
+        target.tagName === 'P' || 
+        target.tagName === 'SPAN' ||
+        target.closest('h1, h2, h3, p');
+      
       dot.classList.toggle('pointer', isPointer);
+      
+      // Show magnifying glass on text, hide normal dot
+      if (isText && !isPointer) {
+        dot.style.opacity = '0';
+        magnifyIcon.style.opacity = '1';
+        magnifyIcon.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+      } else {
+        dot.style.opacity = '1';
+        magnifyIcon.style.opacity = '0';
+      }
     };
 
     // Animate cursor circle with smooth follow
@@ -39,10 +64,14 @@ const CustomCursor = () => {
       requestAnimationFrame(animateCursor);
     };
 
+    document.body.appendChild(magnifyIcon);
     window.addEventListener('mousemove', updateMousePosition, { passive: true });
     animateCursor();
     
-    return () => window.removeEventListener('mousemove', updateMousePosition);
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+      document.body.removeChild(magnifyIcon);
+    };
   }, []);
 
   return (
