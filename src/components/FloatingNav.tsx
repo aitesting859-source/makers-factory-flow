@@ -88,12 +88,14 @@ const FloatingNav = () => {
           </li>
 
           <li>
-            <button
-              onClick={() => scrollToSection('about')}
-              className="text-background hover:text-accent transition-colors"
+            <Link
+              to="/about"
+              className={`transition-colors hover:text-accent ${
+                location.pathname === '/about' ? 'text-accent' : 'text-background'
+              }`}
             >
               ABOUT
-            </button>
+            </Link>
           </li>
 
           <li>

@@ -3,18 +3,19 @@ import { useEffect, useRef } from 'react';
 const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const dotRef = useRef<HTMLDivElement>(null);
+  const mousePos = useRef({ x: 0, y: 0 });
+  const cursorPos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const cursor = cursorRef.current;
     const dot = dotRef.current;
     if (!cursor || !dot) return;
 
-    const updatePosition = (e: MouseEvent) => {
-      const x = e.clientX;
-      const y = e.clientY;
+    const updateMousePosition = (e: MouseEvent) => {
+      mousePos.current = { x: e.clientX, y: e.clientY };
       
-      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      // Update dot immediately
+      dot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
       
       const target = e.target as HTMLElement;
       const isPointer = window.getComputedStyle(target).cursor === 'pointer' ||
@@ -24,8 +25,24 @@ const CustomCursor = () => {
       dot.classList.toggle('pointer', isPointer);
     };
 
-    window.addEventListener('mousemove', updatePosition, { passive: true });
-    return () => window.removeEventListener('mousemove', updatePosition);
+    // Animate cursor circle with smooth follow
+    const animateCursor = () => {
+      const dx = mousePos.current.x - cursorPos.current.x;
+      const dy = mousePos.current.y - cursorPos.current.y;
+      
+      // Smooth easing - cursor follows with delay
+      cursorPos.current.x += dx * 0.15;
+      cursorPos.current.y += dy * 0.15;
+      
+      cursor.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0)`;
+      
+      requestAnimationFrame(animateCursor);
+    };
+
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
+    animateCursor();
+    
+    return () => window.removeEventListener('mousemove', updateMousePosition);
   }, []);
 
   return (
