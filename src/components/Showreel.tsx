@@ -76,7 +76,7 @@ const Showreel = () => {
         >
           <source src="/showreel.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-background/20" />
+        <div className="absolute inset-0 bg-background/40" />
       </div>
       
       {/* Grain Background Animation */}
