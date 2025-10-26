@@ -217,6 +217,25 @@ All colors MUST be HSL.
   opacity: 0;
   transition: opacity 0.2s ease;
   will-change: transform;
+  mix-blend-mode: difference;
+}
+
+/* Auto-scrolling stills animation */
+.stills-scroll {
+  animation: scroll-left 30s linear infinite;
+}
+
+.stills-scroll:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Orbital Particles */

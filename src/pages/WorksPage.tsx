@@ -69,19 +69,69 @@ const WorksPage = () => {
               {work.content}
             </p>
 
-            {/* Portfolio Grid Placeholder */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
-              {[1, 2, 3, 4].map((item) => (
-                <div
-                  key={item}
-                  className="aspect-[16/10] bg-gradient-to-br from-muted to-background rounded-lg border border-primary/20 hover:border-accent/50 transition-all duration-500"
-                >
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-primary/30 text-sm tracking-wider">PROJECT {item}</span>
+            {/* Project Section - Special layout for media-production */}
+            {category === 'media-production' ? (
+              <div className="mt-32 space-y-16">
+                {/* Project Title */}
+                <h2 className="text-4xl md:text-6xl font-black text-center text-accent mb-16 tracking-tight">
+                  PROJECT SHOWCASE
+                </h2>
+
+                {/* Stills - Horizontal Auto-scroll */}
+                <div className="relative overflow-hidden py-8">
+                  <div className="stills-scroll flex gap-6 group">
+                    {[1, 2, 3, 4, 5, 6].map((still) => (
+                      <div
+                        key={still}
+                        className="relative flex-shrink-0 w-[400px] h-[250px] bg-gradient-to-br from-muted to-background rounded-lg border border-primary/20 overflow-hidden transition-all duration-500 hover:scale-125 hover:z-10 hover:shadow-2xl group-hover:[&:not(:hover)]:blur-sm group-hover:[&:not(:hover)]:scale-90"
+                      >
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-primary/30 text-sm tracking-wider">STILL {still}</span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
+
+                {/* Color Graded Picture */}
+                <div className="mt-16">
+                  <h3 className="text-2xl md:text-4xl font-bold text-center text-primary mb-8 tracking-tight">
+                    COLOR GRADED
+                  </h3>
+                  <div className="aspect-[21/9] bg-gradient-to-br from-accent/20 to-primary/10 rounded-lg border border-accent/30 overflow-hidden">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-primary/40 text-lg tracking-wider">COLOR GRADED IMAGE</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Final Trailer Video */}
+                <div className="mt-16">
+                  <h3 className="text-2xl md:text-4xl font-bold text-center text-primary mb-8 tracking-tight">
+                    FINAL OUTPUT
+                  </h3>
+                  <div className="aspect-video bg-gradient-to-br from-primary/10 to-background rounded-lg border border-primary/20 overflow-hidden">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-primary/40 text-lg tracking-wider">TRAILER VIDEO</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Portfolio Grid for other categories */
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20">
+                {[1, 2, 3, 4].map((item) => (
+                  <div
+                    key={item}
+                    className="aspect-[16/10] bg-gradient-to-br from-muted to-background rounded-lg border border-primary/20 hover:border-accent/50 transition-all duration-500"
+                  >
+                    <div className="w-full h-full flex items-center justify-center">
+                      <span className="text-primary/30 text-sm tracking-wider">PROJECT {item}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </main>

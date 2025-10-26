@@ -21,8 +21,19 @@ const FloatingNav = () => {
       setLastScrollY(currentScrollY);
     };
 
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.works-dropdown')) {
+        setIsDropdownOpen(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, [lastScrollY]);
 
   const workItems = [
@@ -58,23 +69,20 @@ const FloatingNav = () => {
             </Link>
           </li>
           
-          <li 
-            className="relative"
-            onMouseLeave={() => setIsDropdownOpen(false)}
-          >
+          <li className="relative works-dropdown">
             <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDropdownOpen(!isDropdownOpen);
+              }}
               className="flex items-center gap-1 text-background hover:text-accent transition-colors"
-              onMouseEnter={() => setIsDropdownOpen(true)}
             >
               WORKS
               <ChevronDown className={`w-4 h-4 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             
             {isDropdownOpen && (
-              <div
-                className="absolute top-full left-0 mt-2 bg-primary/95 backdrop-blur-md border border-background/20 rounded-sm overflow-hidden min-w-[200px] shadow-lg z-50"
-              >
+              <div className="absolute top-full left-0 mt-2 bg-primary/95 backdrop-blur-md border border-background/20 rounded-sm overflow-hidden min-w-[200px] shadow-lg z-50">
                 {workItems.map((item) => (
                   <Link
                     key={item.path}

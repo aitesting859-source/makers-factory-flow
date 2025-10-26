@@ -55,9 +55,9 @@ const CustomCursor = () => {
       const dx = mousePos.current.x - cursorPos.current.x;
       const dy = mousePos.current.y - cursorPos.current.y;
       
-      // Smooth easing - cursor follows with delay
-      cursorPos.current.x += dx * 0.15;
-      cursorPos.current.y += dy * 0.15;
+      // Faster easing - cursor follows more quickly
+      cursorPos.current.x += dx * 0.25;
+      cursorPos.current.y += dy * 0.25;
       
       cursor.style.transform = `translate3d(${cursorPos.current.x}px, ${cursorPos.current.y}px, 0)`;
       
