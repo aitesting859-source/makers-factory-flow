@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import ShowreelParticles from './ShowreelParticles';
 import VideoControls from './VideoControls';
 
 const Showreel = () => {
@@ -65,10 +64,20 @@ const Showreel = () => {
     <section 
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center px-4 py-32"
-      style={{ opacity: scrollOpacity }}
     >
-      {/* Orbital Particles */}
-      <ShowreelParticles />
+      {/* Full Background Video */}
+      <div className="fixed inset-0 w-full h-full -z-10" style={{ opacity: scrollOpacity }}>
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src="/showreel.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-background/20" />
+      </div>
       
       {/* Grain Background Animation */}
       <div className="absolute inset-0 grain-overlay opacity-30" />

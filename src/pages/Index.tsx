@@ -5,14 +5,10 @@ import HeroText from '@/components/HeroText';
 import AboutSection from '@/components/AboutSection';
 import WorksSection from '@/components/WorksSection';
 import Footer from '@/components/Footer';
-import StarField from '@/components/StarField';
 
 const Index = () => {
   return (
     <div className="relative min-h-screen bg-background">
-      {/* Star Field Background */}
-      <StarField />
-      
       {/* Grain Overlay */}
       <div className="grain-overlay" />
       
