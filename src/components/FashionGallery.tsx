@@ -13,22 +13,23 @@ interface MediaItem {
   y: number;
 }
 
-// Check if two rectangles overlap
+// Check if two rectangles overlap with small gap
 const isOverlapping = (rect1: { x: number; y: number; width: number; height: number }, rect2: { x: number; y: number; width: number; height: number }) => {
-  return !(rect1.x + rect1.width + 40 < rect2.x || 
-           rect1.x > rect2.x + rect2.width + 40 ||
-           rect1.y + rect1.height + 40 < rect2.y || 
-           rect1.y > rect2.y + rect2.height + 40);
+  const gap = 20; // Small gap between photos
+  return !(rect1.x + rect1.width + gap < rect2.x || 
+           rect1.x > rect2.x + rect2.width + gap ||
+           rect1.y + rect1.height + gap < rect2.y || 
+           rect1.y > rect2.y + rect2.height + gap);
 };
 
 // Generate random position without overlap
 const generatePosition = (width: number, height: number, existingItems: MediaItem[], containerWidth: number, yOffset: number) => {
   let attempts = 0;
-  const maxAttempts = 50;
+  const maxAttempts = 100;
   
   while (attempts < maxAttempts) {
-    const x = Math.random() * (containerWidth - width - 100) + 50;
-    const y = yOffset + Math.random() * 400;
+    const x = Math.random() * (containerWidth - width - 80) + 40;
+    const y = yOffset + Math.random() * 300;
     
     const overlaps = existingItems.some(item =>
       isOverlapping({ x, y, width, height }, { x: item.x, y: item.y, width: item.width, height: item.height })
@@ -41,7 +42,7 @@ const generatePosition = (width: number, height: number, existingItems: MediaIte
   }
   
   // Fallback: place in next available row
-  return { x: 50 + Math.random() * 200, y: yOffset + 500 };
+  return { x: 40 + Math.random() * 150, y: yOffset + 350 };
 };
 
 // Sample data - replace with your actual images/videos
@@ -80,7 +81,7 @@ const generateMediaItems = (): MediaItem[] => {
         break;
     }
 
-    const yOffset = Math.floor(i / 4) * 500;
+    const yOffset = Math.floor(i / 5) * 380;
     const position = generatePosition(width, height, items, containerWidth, yOffset);
 
     items.push({
