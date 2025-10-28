@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import FloatingNav from '@/components/FloatingNav';
 import Footer from '@/components/Footer';
+import FashionGallery from '@/components/FashionGallery';
 import { useEffect, useState } from 'react';
 
 const worksContent = {
@@ -40,6 +41,18 @@ const WorksPage = () => {
 
   if (!work) {
     return <div className="min-h-screen flex items-center justify-center">Work not found</div>;
+  }
+
+  // Special layout for fashion-editorial
+  if (category === 'fashion-editorial') {
+    return (
+      <div className="relative min-h-screen bg-background">
+        <div className="grain-overlay" />
+        <FloatingNav />
+        <FashionGallery />
+        <Footer />
+      </div>
+    );
   }
 
   return (
