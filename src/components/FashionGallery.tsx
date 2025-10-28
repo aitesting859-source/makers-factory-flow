@@ -9,7 +9,40 @@ interface MediaItem {
   width: number;
   height: number;
   shape: 'square' | 'portrait' | 'landscape' | 'wide';
+  x: number;
+  y: number;
 }
+
+// Check if two rectangles overlap
+const isOverlapping = (rect1: { x: number; y: number; width: number; height: number }, rect2: { x: number; y: number; width: number; height: number }) => {
+  return !(rect1.x + rect1.width + 40 < rect2.x || 
+           rect1.x > rect2.x + rect2.width + 40 ||
+           rect1.y + rect1.height + 40 < rect2.y || 
+           rect1.y > rect2.y + rect2.height + 40);
+};
+
+// Generate random position without overlap
+const generatePosition = (width: number, height: number, existingItems: MediaItem[], containerWidth: number, yOffset: number) => {
+  let attempts = 0;
+  const maxAttempts = 50;
+  
+  while (attempts < maxAttempts) {
+    const x = Math.random() * (containerWidth - width - 100) + 50;
+    const y = yOffset + Math.random() * 400;
+    
+    const overlaps = existingItems.some(item =>
+      isOverlapping({ x, y, width, height }, { x: item.x, y: item.y, width: item.width, height: item.height })
+    );
+    
+    if (!overlaps) {
+      return { x, y };
+    }
+    attempts++;
+  }
+  
+  // Fallback: place in next available row
+  return { x: 50 + Math.random() * 200, y: yOffset + 500 };
+};
 
 // Sample data - replace with your actual images/videos
 const generateMediaItems = (): MediaItem[] => {
@@ -21,7 +54,10 @@ const generateMediaItems = (): MediaItem[] => {
     { title: 'Minimalist Elegance', models: ['Anna T.', 'Zoe M.', 'Kate V.'] },
   ];
 
-  return Array.from({ length: 50 }, (_, i) => {
+  const items: MediaItem[] = [];
+  const containerWidth = 1400;
+  
+  for (let i = 0; i < 50; i++) {
     const shoot = shoots[Math.floor(Math.random() * shoots.length)];
     const shape = shapes[Math.floor(Math.random() * shapes.length)];
     const isVideo = Math.random() < 0.15; // 15% videos
@@ -44,7 +80,10 @@ const generateMediaItems = (): MediaItem[] => {
         break;
     }
 
-    return {
+    const yOffset = Math.floor(i / 4) * 500;
+    const position = generatePosition(width, height, items, containerWidth, yOffset);
+
+    items.push({
       id: i,
       type: isVideo ? 'video' : 'image',
       src: isVideo ? '/showreel.mp4' : `https://images.unsplash.com/photo-${1500000000000 + i * 100000}?w=${width}&h=${height}&fit=crop`,
@@ -53,136 +92,108 @@ const generateMediaItems = (): MediaItem[] => {
       width,
       height,
       shape,
-    };
-  });
+      x: position.x,
+      y: position.y,
+    });
+  }
+  
+  return items;
 };
 
 const FashionGallery = () => {
   const [items] = useState<MediaItem[]>(generateMediaItems());
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
+  const [offsetX, setOffsetX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Auto-slide to next frame
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % items.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [items.length]);
+  // Calculate total height for scrolling
+  const totalHeight = Math.max(...items.map(item => item.y + item.height)) + 200;
 
-  // Mouse/Touch handlers for drag
+  // Mouse handlers for horizontal drag
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
-    setDragStart({ x: e.clientX - transform.x, y: e.clientY - transform.y });
+    setDragStart(e.clientX);
+    setDragOffset(offsetX);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
-    setTransform((prev) => ({
-      ...prev,
-      x: e.clientX - dragStart.x,
-      y: e.clientY - dragStart.y,
-    }));
+    const diff = e.clientX - dragStart;
+    setOffsetX(dragOffset + diff);
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
   };
 
-  // Zoom handlers
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const delta = e.deltaY * -0.001;
-    const newScale = Math.min(Math.max(0.5, transform.scale + delta), 3);
-    setTransform((prev) => ({ ...prev, scale: newScale }));
-  };
-
-  // Get visible items (current + nearby for smooth transitions)
-  const getVisibleItems = () => {
-    const visible = [];
-    for (let i = -2; i <= 2; i++) {
-      const index = (currentIndex + i + items.length) % items.length;
-      visible.push({ ...items[index], offset: i });
-    }
-    return visible;
-  };
-
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden cursor-move bg-background"
+      className="relative w-full h-screen overflow-y-auto overflow-x-hidden bg-background cursor-grab active:cursor-grabbing"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
-      onWheel={handleWheel}
     >
       <div
-        className="absolute inset-0 transition-transform duration-200"
+        className="relative mx-auto"
         style={{
-          transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
+          height: `${totalHeight}px`,
+          width: '1400px',
+          transform: `translateX(${offsetX}px)`,
+          transition: isDragging ? 'none' : 'transform 0.3s ease-out',
         }}
       >
-        {getVisibleItems().map((item, idx) => {
-          const offsetX = item.offset * 150;
-          const offsetY = Math.sin(item.offset * 0.5) * 100;
-          const rotation = item.offset * 5;
-          const opacity = 1 - Math.abs(item.offset) * 0.2;
-
-          return (
-            <div
-              key={`${item.id}-${idx}`}
-              className="absolute transition-all duration-1000 ease-out"
-              style={{
-                left: '50%',
-                top: '50%',
-                width: `${item.width}px`,
-                height: `${item.height}px`,
-                transform: `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px)) rotate(${rotation}deg)`,
-                opacity: Math.abs(item.offset) > 1 ? 0 : opacity,
-                zIndex: item.offset === 0 ? 20 : 10 - Math.abs(item.offset),
-              }}
-            >
-              <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl border-4 border-white group">
-                {item.type === 'video' ? (
-                  <video
-                    src={item.src}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <img
-                    src={item.src}
-                    alt={`${item.shootTitle} - ${item.modelName}`}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-                
-                {/* Title overlay */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <h3 className="text-white font-bold text-lg tracking-wide">{item.shootTitle}</h3>
-                  <p className="text-white/80 text-sm tracking-wider">{item.modelName}</p>
-                </div>
+        {items.map((item) => (
+          <div
+            key={item.id}
+            className="absolute"
+            style={{
+              left: `${item.x}px`,
+              top: `${item.y}px`,
+              width: `${item.width}px`,
+              height: `${item.height}px`,
+            }}
+          >
+            <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl border-4 border-white group hover:scale-105 hover:z-50 transition-all duration-300">
+              {item.type === 'video' ? (
+                <video
+                  src={item.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={item.src}
+                  alt={`${item.shootTitle} - ${item.modelName}`}
+                  className="w-full h-full object-cover"
+                  draggable={false}
+                />
+              )}
+              
+              {/* Title overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-white font-bold text-lg tracking-wide">{item.shootTitle}</h3>
+                <p className="text-white/80 text-sm tracking-wider">{item.modelName}</p>
               </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
 
       {/* Controls info */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-6 py-3 rounded-full text-white text-sm tracking-wider z-30">
-        <span className="opacity-70">Drag to move • Scroll to zoom • Auto-slides every 4s</span>
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-6 py-3 rounded-full text-white text-sm tracking-wider z-30 pointer-events-none">
+        <span className="opacity-70">Scroll to move down • Drag to slide horizontally</span>
       </div>
 
       {/* Counter */}
-      <div className="absolute top-8 right-8 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm tracking-wider z-30">
-        <span>{currentIndex + 1} / {items.length}</span>
+      <div className="fixed top-8 right-8 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm tracking-wider z-30 pointer-events-none">
+        <span>{items.length} photos</span>
       </div>
     </div>
   );
