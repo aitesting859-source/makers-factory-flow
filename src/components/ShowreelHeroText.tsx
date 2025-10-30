@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 
 const ShowreelHeroText = () => {
-  const [scrollOpacity, setScrollOpacity] = useState(1);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       if (heroRef.current) {
         const scrolled = window.scrollY;
-        const startFade = window.innerHeight * 0.8;
-        const endFade = window.innerHeight * 1.5;
+        const startAnimation = window.innerHeight * 0.5;
+        const endAnimation = window.innerHeight * 2.5;
         
-        if (scrolled < startFade) {
-          setScrollOpacity(1);
-        } else if (scrolled > endFade) {
-          setScrollOpacity(0);
+        if (scrolled < startAnimation) {
+          setScrollProgress(0);
+        } else if (scrolled > endAnimation) {
+          setScrollProgress(1);
         } else {
-          const progress = (scrolled - startFade) / (endFade - startFade);
-          setScrollOpacity(1 - progress);
+          const progress = (scrolled - startAnimation) / (endAnimation - startAnimation);
+          setScrollProgress(progress);
         }
       }
     };
@@ -28,17 +28,27 @@ const ShowreelHeroText = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const rotation = scrollProgress * 90;
+  const translateY = scrollProgress * -300;
+  const opacity = 1 - scrollProgress * 0.3;
+
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-[60vh] flex items-center justify-center px-4 py-20"
-      style={{ opacity: scrollOpacity }}
+      className="relative min-h-[40vh] flex items-center justify-center px-4 py-20"
     >
-      <h2 className="text-center">
-        <div className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-none">
-          <span className="block text-primary">THE MAKERS</span>
-          <span className="block text-accent mt-2">FACTORY</span>
-        </div>
+      <h2 
+        className="text-center text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none"
+        style={{
+          transform: `translateY(${translateY}px) rotateX(${rotation}deg)`,
+          opacity: opacity,
+          transformStyle: 'preserve-3d',
+          perspective: '1000px',
+          transition: 'transform 0.1s ease-out, opacity 0.1s ease-out',
+        }}
+      >
+        <span className="inline-block text-primary">THE MAKERS </span>
+        <span className="inline-block text-accent">FACTORY</span>
       </h2>
     </section>
   );
