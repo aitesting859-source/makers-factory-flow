@@ -9,9 +9,9 @@ const ShowreelHeroText = () => {
       if (heroRef.current) {
         const scrolled = window.scrollY;
         const viewportHeight = window.innerHeight;
-        // Start fading after first scroll, complete after 3 scrolls
-        const startAnimation = viewportHeight * 0.3;
-        const endAnimation = viewportHeight * 3;
+        // Extended animation over 5-6 scrolls for smoother, slower transition
+        const startAnimation = viewportHeight * 0.5;
+        const endAnimation = viewportHeight * 6;
         
         if (scrolled < startAnimation) {
           setScrollProgress(0);
@@ -30,11 +30,11 @@ const ShowreelHeroText = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth animations over 3 scrolls
-  const translateY = scrollProgress * -600; // Move up significantly
-  const opacity = 1 - scrollProgress; // Complete fade out
-  const rotation = scrollProgress * 90; // Rotate as it moves up
-  const letterSpacing = scrollProgress * 12; // Increase letter spacing
+  // Ultra-smooth gradual animations
+  const translateY = scrollProgress * -800; // Slower vertical movement
+  const opacity = 1 - scrollProgress; // Very gradual fade
+  const rotation = scrollProgress * 60; // Gentler rotation
+  const letterSpacing = scrollProgress * 8; // Subtle spacing increase
 
   return (
     <section 
@@ -47,25 +47,27 @@ const ShowreelHeroText = () => {
           transform: `translateY(${translateY}px) rotateX(${rotation}deg)`,
           opacity: opacity,
           transformStyle: 'preserve-3d',
-          perspective: '1500px',
+          perspective: '2000px',
           letterSpacing: `${letterSpacing}px`,
-          transition: 'all 0.05s linear',
+          transition: 'all 0.3s ease-out', // Smooth transition between frames
         }}
       >
         <span 
-          className="text-primary transition-all duration-500 ease-out"
+          className="text-primary"
           style={{
-            display: scrollProgress > 0.2 ? 'block' : 'inline-block',
-            marginBottom: scrollProgress > 0.2 ? '0.75rem' : '0',
+            display: scrollProgress > 0.4 ? 'block' : 'inline-block',
+            marginBottom: scrollProgress > 0.4 ? '0.75rem' : '0',
+            transition: 'all 0.8s ease-out', // Slow transition for line break
           }}
         >
           THE MAKERS
         </span>
-        {scrollProgress <= 0.2 && ' '}
+        {scrollProgress <= 0.4 && ' '}
         <span 
-          className="text-accent transition-all duration-500 ease-out"
+          className="text-accent"
           style={{
-            display: scrollProgress > 0.2 ? 'block' : 'inline-block',
+            display: scrollProgress > 0.4 ? 'block' : 'inline-block',
+            transition: 'all 0.8s ease-out', // Slow transition for line break
           }}
         >
           FACTORY
