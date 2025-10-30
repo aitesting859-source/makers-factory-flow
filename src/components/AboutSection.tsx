@@ -42,9 +42,9 @@ const AboutSection = () => {
       style={{ filter: `blur(${blurAmount}px)`, transition: 'filter 0.3s ease-out' }}
     >
       {/* Four Corner Images Layout */}
-      <div className="relative min-h-screen flex items-center justify-center px-4 py-32">
-        {/* Top Left Corner Image */}
-        <div className="absolute top-8 left-8 w-64 h-64 md:w-80 md:h-80 overflow-hidden">
+      <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 py-24 md:py-32">
+        {/* Top Left Corner Image - Random offset */}
+        <div className="absolute top-4 sm:top-8 md:top-12 left-4 sm:left-6 md:left-10 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-2">
           <img 
             src={aboutCorner1} 
             alt="Visual storytelling" 
@@ -52,8 +52,8 @@ const AboutSection = () => {
           />
         </div>
 
-        {/* Top Right Corner Image */}
-        <div className="absolute top-8 right-8 w-64 h-64 md:w-80 md:h-80 overflow-hidden">
+        {/* Top Right Corner Image - Random offset */}
+        <div className="absolute top-8 sm:top-12 md:top-16 right-2 sm:right-4 md:right-8 w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-60 lg:h-60 overflow-hidden transform -rotate-3">
           <img 
             src={aboutCorner2} 
             alt="Creative process" 
@@ -61,8 +61,8 @@ const AboutSection = () => {
           />
         </div>
 
-        {/* Bottom Left Corner Image */}
-        <div className="absolute bottom-8 left-8 w-64 h-64 md:w-80 md:h-80 overflow-hidden">
+        {/* Bottom Left Corner Image - Random offset */}
+        <div className="absolute bottom-6 sm:bottom-10 md:bottom-14 left-2 sm:left-4 md:left-6 w-40 h-32 sm:w-48 sm:h-40 md:w-56 md:h-48 lg:w-64 lg:h-56 overflow-hidden transform -rotate-1">
           <img 
             src={aboutCorner3} 
             alt="Behind the scenes" 
@@ -70,8 +70,8 @@ const AboutSection = () => {
           />
         </div>
 
-        {/* Bottom Right Corner Image */}
-        <div className="absolute bottom-8 right-8 w-64 h-64 md:w-80 md:h-80 overflow-hidden">
+        {/* Bottom Right Corner Image - Random offset */}
+        <div className="absolute bottom-4 sm:bottom-8 md:bottom-12 right-4 sm:right-8 md:right-12 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-3">
           <img 
             src={aboutCorner4} 
             alt="Final moments" 
@@ -79,23 +79,23 @@ const AboutSection = () => {
           />
         </div>
 
-        {/* Center Content */}
-        <div className="relative z-10 max-w-4xl mx-auto text-center space-y-12">
-          <div className="h-px w-24 bg-accent mx-auto" />
+        {/* Center Content - Constrained width to avoid overlap */}
+        <div className="relative z-10 max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto text-center space-y-6 md:space-y-10 px-4">
+          <div className="h-px w-16 md:w-24 bg-accent mx-auto" />
           
-          <p className="text-2xl md:text-3xl text-primary/80 leading-relaxed font-light">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-primary/80 leading-relaxed font-light">
             We are a collective of indie creators pushing the boundaries of visual storytelling.
           </p>
           
-          <p className="text-2xl md:text-3xl text-primary/80 leading-relaxed font-light">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-primary/80 leading-relaxed font-light">
             Our work spans media production, commercial advertising, fashion editorial, and fine art wedding cinematography.
           </p>
           
-          <p className="text-2xl md:text-3xl text-primary/80 leading-relaxed font-light">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-primary/80 leading-relaxed font-light">
             Each project is an opportunity to create something extraordinary.
           </p>
           
-          <div className="h-px w-24 bg-accent mx-auto" />
+          <div className="h-px w-16 md:w-24 bg-accent mx-auto" />
         </div>
       </div>
     </section>
