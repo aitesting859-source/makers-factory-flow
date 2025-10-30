@@ -35,6 +35,9 @@ const ShowreelHeroText = () => {
   const opacity = 1 - scrollProgress; // Very gradual fade
   const rotation = scrollProgress * 60; // Gentler rotation
   const letterSpacing = scrollProgress * 8; // Subtle spacing increase
+  
+  // Break into two lines earlier in the scroll
+  const shouldBreakLine = scrollProgress > 0.15;
 
   return (
     <section 
@@ -53,21 +56,18 @@ const ShowreelHeroText = () => {
         }}
       >
         <span 
-          className="text-primary"
+          className="text-primary block"
           style={{
-            display: scrollProgress > 0.4 ? 'block' : 'inline-block',
-            marginBottom: scrollProgress > 0.4 ? '0.75rem' : '0',
-            transition: 'all 0.8s ease-out', // Slow transition for line break
+            marginBottom: shouldBreakLine ? '0.75rem' : '0',
+            transition: 'margin-bottom 0.6s ease-out',
           }}
         >
           THE MAKERS
         </span>
-        {scrollProgress <= 0.4 && ' '}
         <span 
-          className="text-accent"
+          className="text-accent block"
           style={{
-            display: scrollProgress > 0.4 ? 'block' : 'inline-block',
-            transition: 'all 0.8s ease-out', // Slow transition for line break
+            transition: 'all 0.6s ease-out',
           }}
         >
           FACTORY
