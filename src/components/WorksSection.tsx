@@ -25,9 +25,9 @@ const works = [
     image: fashionEditorialImg,
   },
   {
-    title: 'Fine Art Weddings',
-    path: '/works/fine-art-weddings',
-    description: 'Timeless moments captured beautifully',
+    title: 'Wedding by TMF',
+    path: '/works/wedding-by-tmf',
+    description: 'Stories of Love & Joy',
     image: fineArtWeddingsImg,
   },
 ];
