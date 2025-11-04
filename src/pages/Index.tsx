@@ -3,6 +3,7 @@ import Showreel from '@/components/Showreel';
 import ShowreelHeroText from '@/components/ShowreelHeroText';
 import AboutSection from '@/components/AboutSection';
 import WorksSection from '@/components/WorksSection';
+import PortfolioAbout from '@/components/PortfolioAbout';
 import { VelocityScroll } from '@/components/VelocityScroll';
 import Footer from '@/components/Footer';
 
@@ -28,6 +29,9 @@ const Index = () => {
         
         {/* Works Section */}
         <WorksSection />
+        
+        {/* Portfolio About Us Section */}
+        <PortfolioAbout />
         
         {/* Velocity Scroll Animation */}
         <VelocityScroll 

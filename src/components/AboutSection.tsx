@@ -88,7 +88,7 @@ const AboutSection = () => {
           </p>
           
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-primary/80 leading-relaxed font-light">
-            Our work spans media production, commercial advertising, fashion editorial, and fine art wedding cinematography.
+            Our work spans media production, commercial advertising, fashion editorial, and wedding cinematography.
           </p>
           
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-primary/80 leading-relaxed font-light">

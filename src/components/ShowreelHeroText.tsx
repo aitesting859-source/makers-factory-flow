@@ -30,49 +30,33 @@ const ShowreelHeroText = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Ultra-smooth gradual animations
-  const translateY = scrollProgress * -800; // Slower vertical movement
-  const opacity = 1 - scrollProgress; // Very gradual fade
-  const rotation = scrollProgress * 60; // Gentler rotation
-  const letterSpacing = scrollProgress * 8; // Subtle spacing increase
-  
-  // Break into two lines earlier in the scroll
-  const shouldBreakLine = scrollProgress > 0.15;
+  // Ultra-smooth gradual animations - moving upward
+  const translateY = -scrollProgress * 400; // Move upward as user scrolls
+  const opacity = Math.max(0.3, 1 - scrollProgress * 0.7); // Keep slightly visible
 
   return (
     <section 
       ref={heroRef}
       className="relative h-[60vh] flex items-center justify-center px-4 py-12"
     >
-      <h2 
-        className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-tight"
+      <div 
+        className="text-center space-y-2"
         style={{
-          transform: `translateY(${translateY}px) rotateX(${rotation}deg)`,
+          transform: `translateY(${translateY}px)`,
           opacity: opacity,
-          transformStyle: 'preserve-3d',
-          perspective: '2000px',
-          letterSpacing: `${letterSpacing}px`,
-          transition: 'all 0.3s ease-out', // Smooth transition between frames
+          transition: 'all 0.3s ease-out',
         }}
       >
-        <span 
-          className="text-primary block"
-          style={{
-            marginBottom: shouldBreakLine ? '0.75rem' : '0',
-            transition: 'margin-bottom 0.6s ease-out',
-          }}
-        >
-          THE MAKERS
-        </span>
-        <span 
-          className="text-accent block"
-          style={{
-            transition: 'all 0.6s ease-out',
-          }}
-        >
-          FACTORY
-        </span>
-      </h2>
+        <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-primary tracking-tighter">
+          THE
+        </h2>
+        <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-accent tracking-tighter">
+          MAKERS FACTORY
+        </h2>
+        <p className="text-base sm:text-lg md:text-xl text-primary/60 tracking-wider uppercase pt-4">
+          (Indie - Video Creators)
+        </p>
+      </div>
     </section>
   );
 };
