@@ -2,9 +2,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
-import WorksPage from "./pages/WorksPage";
+import AdCommercialsPage from "./pages/AdCommercialsPage";
+import FashionEditorialPage from "./pages/FashionEditorialPage";
+import WeddingPage from "./pages/WeddingPage";
+import MediaProductionPage from "./pages/MediaProductionPage";
 import AboutPage from "./pages/AboutPage";
 import NotFound from "./pages/NotFound";
 import CustomCursor from "./components/CustomCursor";
@@ -21,7 +24,12 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="/works/:category" element={<WorksPage />} />
+          <Route path="/works/ad-commercials" element={<AdCommercialsPage />} />
+          <Route path="/works/fashion-editorial" element={<FashionEditorialPage />} />
+          <Route path="/works/wedding-by-tmf" element={<WeddingPage />} />
+          <Route path="/works/media-production" element={<MediaProductionPage />} />
+          {/* Redirect old fine-art-weddings route to new wedding-by-tmf */}
+          <Route path="/works/fine-art-weddings" element={<Navigate to="/works/wedding-by-tmf" replace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
