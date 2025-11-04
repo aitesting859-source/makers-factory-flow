@@ -3,6 +3,7 @@ import Showreel from '@/components/Showreel';
 import ShowreelHeroText from '@/components/ShowreelHeroText';
 import AboutSection from '@/components/AboutSection';
 import WorksSection from '@/components/WorksSection';
+import { VelocityScroll } from '@/components/VelocityScroll';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -27,6 +28,13 @@ const Index = () => {
         
         {/* Works Section */}
         <WorksSection />
+        
+        {/* Velocity Scroll Animation */}
+        <VelocityScroll 
+          text="THE MAKERS FACTORY" 
+          default_velocity={5} 
+          className="text-6xl font-black text-primary/20"
+        />
       </main>
       
       {/* Footer */}
