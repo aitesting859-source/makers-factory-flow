@@ -106,7 +106,7 @@ export function VelocityScroll({
   }
 
   return (
-    <section className="relative w-full">
+    <section className="relative w-full py-16">
       <ParallaxText baseVelocity={default_velocity} className={className}>
         {text}
       </ParallaxText>
