@@ -2,14 +2,17 @@ import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import FloatingNav from '@/components/FloatingNav';
 import Footer from '@/components/Footer';
+import { VelocityScroll } from '@/components/VelocityScroll';
 import aboutCorner1 from '@/assets/about-corner-1.jpg';
 import aboutCorner3 from '@/assets/about-corner-3.jpg';
 
 const AboutPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.8]);
+  const { scrollY } = useScroll();
+  
+  // Fade out hero text when scrolling down, fade in when scrolling up
+  const heroOpacity = useTransform(scrollY, [0, 500, 1000], [1, 0.5, 0]);
+  const heroY = useTransform(scrollY, [0, 500], [0, -150]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -62,7 +65,7 @@ const AboutPage = () => {
         {/* Hero Title */}
         <motion.div 
           className="relative h-screen flex items-center justify-center px-4"
-          style={{ opacity, scale }}
+          style={{ opacity: heroOpacity, y: heroY }}
         >
           <motion.div 
             className="text-center space-y-8 max-w-6xl mx-auto"
@@ -441,6 +444,13 @@ const AboutPage = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Velocity Scroll Animation */}
+      <VelocityScroll 
+        text="THE MAKERS FACTORY" 
+        default_velocity={5} 
+        className="text-6xl font-black text-primary/20"
+      />
 
       <Footer />
     </div>
