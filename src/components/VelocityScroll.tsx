@@ -35,6 +35,10 @@ export function VelocityScroll({
   default_velocity = 5,
   className,
 }: VelocityScrollProps) {
+  const { scrollY } = useScroll();
+  const sectionOpacity = useTransform(scrollY, [800, 1200, 2000], [0, 1, 0]);
+  const sectionY = useTransform(scrollY, [800, 1200], [-50, 0]);
+
   function ParallaxText({
     children,
     baseVelocity = 100,
@@ -106,10 +110,13 @@ export function VelocityScroll({
   }
 
   return (
-    <section className="relative w-full py-16">
+    <motion.section 
+      className="relative w-full py-16"
+      style={{ opacity: sectionOpacity, y: sectionY }}
+    >
       <ParallaxText baseVelocity={default_velocity} className={className}>
         {text}
       </ParallaxText>
-    </section>
+    </motion.section>
   );
 }
