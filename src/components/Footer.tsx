@@ -13,18 +13,6 @@ const Footer = () => {
             </span>
           ))}
         </div>
-        
-        {/* Duplicate for seamless loop */}
-        <div className="absolute top-0 flex animate-marquee whitespace-nowrap" style={{ animationDelay: '10s' }}>
-          {[...Array(10)].map((_, i) => (
-            <span
-              key={i}
-              className="inline-block text-6xl md:text-8xl font-black text-primary/10 mx-8"
-            >
-              THE MAKERS FACTORY
-            </span>
-          ))}
-        </div>
       </div>
 
       {/* Contact Information */}

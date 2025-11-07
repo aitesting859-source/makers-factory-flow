@@ -105,7 +105,7 @@ const AboutPage = () => {
         </motion.div>
 
         {/* Content Grid */}
-        <div className="max-w-7xl mx-auto px-4 md:px-8 pb-32">
+        <div className={`max-w-7xl mx-auto px-4 md:px-8 pb-32 blur-load ${isLoaded ? 'loaded' : ''}`}>
           {/* Large Image + Text Block */}
           <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
             <motion.div 
@@ -227,7 +227,7 @@ const AboutPage = () => {
         <div className="border-t border-border/10">
           {/* Vision Statement */}
           <motion.div 
-            className="max-w-7xl mx-auto px-4 md:px-8 py-32"
+            className={`max-w-7xl mx-auto px-4 md:px-8 py-32 blur-load ${isLoaded ? 'loaded' : ''}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -256,7 +256,7 @@ const AboutPage = () => {
 
           {/* What We Do */}
           <motion.div 
-            className="max-w-7xl mx-auto px-4 md:px-8 py-32 border-t border-border/10"
+            className={`max-w-7xl mx-auto px-4 md:px-8 py-32 border-t border-border/10 blur-load ${isLoaded ? 'loaded' : ''}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -319,7 +319,7 @@ const AboutPage = () => {
 
           {/* Our Process */}
           <motion.div 
-            className="max-w-7xl mx-auto px-4 md:px-8 py-32 border-t border-border/10"
+            className={`max-w-7xl mx-auto px-4 md:px-8 py-32 border-t border-border/10 blur-load ${isLoaded ? 'loaded' : ''}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -360,7 +360,7 @@ const AboutPage = () => {
 
           {/* Philosophy */}
           <motion.div 
-            className="max-w-7xl mx-auto px-4 md:px-8 py-32 border-t border-border/10"
+            className={`max-w-7xl mx-auto px-4 md:px-8 py-32 border-t border-border/10 blur-load ${isLoaded ? 'loaded' : ''}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
@@ -413,7 +413,7 @@ const AboutPage = () => {
 
           {/* CTA Section */}
           <motion.div 
-            className="max-w-7xl mx-auto px-4 md:px-8 py-32 border-t border-border/10"
+            className={`max-w-7xl mx-auto px-4 md:px-8 py-32 border-t border-border/10 blur-load ${isLoaded ? 'loaded' : ''}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}

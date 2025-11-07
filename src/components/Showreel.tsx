@@ -21,9 +21,14 @@ const Showreel = () => {
 
     const handleScroll = () => {
       if (sectionRef.current) {
-        const scrolled = window.scrollY;
-        const fadePoint = window.innerHeight * 3;
-        const opacity = Math.max(0, 1 - scrolled / fadePoint);
+        const rect = sectionRef.current.getBoundingClientRect();
+        const sectionTop = rect.top;
+        const sectionHeight = rect.height;
+        
+        // Fade out background video when scrolling past the section
+        // After 3 scrolls (approximately 3x viewport height), opacity becomes 0
+        const scrollProgress = Math.max(0, -sectionTop / (sectionHeight * 2));
+        const opacity = Math.max(0, 1 - scrollProgress);
         setScrollOpacity(opacity);
       }
     };
