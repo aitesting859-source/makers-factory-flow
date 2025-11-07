@@ -1,6 +1,7 @@
 import FloatingNav from '@/components/FloatingNav';
 import Showreel from '@/components/Showreel';
 import ShowreelHeroText from '@/components/ShowreelHeroText';
+import AboutSection from '@/components/AboutSection';
 import WorksSection from '@/components/WorksSection';
 import PortfolioAbout from '@/components/PortfolioAbout';
 import { VelocityScroll } from '@/components/VelocityScroll';
@@ -22,6 +23,9 @@ const Index = () => {
         
         {/* Showreel Hero Text */}
         <ShowreelHeroText />
+        
+        {/* About Section with Four Corner Images */}
+        <AboutSection />
         
         {/* Works Section */}
         <WorksSection />

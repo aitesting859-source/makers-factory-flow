@@ -14,25 +14,13 @@ const PortfolioAbout = () => {
     <section className={`relative min-h-screen px-4 py-32 border-t border-border/20 blur-load ${isLoaded ? 'loaded' : ''}`}>
       <div className="max-w-7xl mx-auto">
         {/* About Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-32">
           <h2 className="text-6xl md:text-8xl font-black text-primary mb-8 tracking-tight">
             ABOUT <span className="text-accent">US</span>
           </h2>
           <p className="text-xl md:text-2xl text-primary/60 max-w-3xl mx-auto leading-relaxed">
             We are indie video creators who believe in the power of authentic storytelling
           </p>
-        </div>
-
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto mb-32">
-          <div className="text-center p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20">
-            <h4 className="text-5xl md:text-6xl font-black text-accent mb-3">50+</h4>
-            <p className="text-sm text-primary/60 uppercase tracking-wider">Projects Completed</p>
-          </div>
-          <div className="text-center p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20">
-            <h4 className="text-5xl md:text-6xl font-black text-accent mb-3">10+</h4>
-            <p className="text-sm text-primary/60 uppercase tracking-wider">Years Experience</p>
-          </div>
         </div>
 
         {/* Two Column Layout */}
