@@ -1,8 +1,13 @@
+import ContactForm from './ContactForm';
+
 const Footer = () => {
   return (
     <footer id="contact" className="relative overflow-hidden bg-muted/30 backdrop-blur-sm border-t border-border/20 py-16">
+      {/* Contact Form */}
+      <ContactForm />
+
       {/* Continuous Marquee Animation */}
-      <div className="relative">
+      <div className="relative mt-16">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(10)].map((_, i) => (
             <span

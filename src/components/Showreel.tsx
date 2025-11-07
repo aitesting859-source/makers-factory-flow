@@ -71,7 +71,7 @@ const Showreel = () => {
       className="relative min-h-screen flex items-center justify-center px-4 py-32"
     >
       {/* Full Background Video */}
-      <div className="fixed inset-0 w-full h-full -z-10" style={{ opacity: scrollOpacity }}>
+      <div className="fixed inset-0 w-full h-full -z-10 pointer-events-none" style={{ opacity: scrollOpacity }}>
         <video
           className="w-full h-full object-cover"
           autoPlay
