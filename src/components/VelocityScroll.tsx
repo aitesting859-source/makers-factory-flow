@@ -62,12 +62,15 @@ export function VelocityScroll({
 
     useEffect(() => {
       const calculateRepetitions = () => {
-        if (containerRef.current && textRef.current) {
-          const containerWidth = containerRef.current.offsetWidth;
-          const textWidth = textRef.current.offsetWidth;
-          const newRepetitions = Math.ceil(containerWidth / textWidth) + 2;
-          setRepetitions(newRepetitions);
-        }
+        // Use requestAnimationFrame to batch layout reads at optimal time
+        requestAnimationFrame(() => {
+          if (containerRef.current && textRef.current) {
+            const containerWidth = containerRef.current.offsetWidth;
+            const textWidth = textRef.current.offsetWidth;
+            const newRepetitions = Math.ceil(containerWidth / textWidth) + 2;
+            setRepetitions(newRepetitions);
+          }
+        });
       };
 
       calculateRepetitions();
