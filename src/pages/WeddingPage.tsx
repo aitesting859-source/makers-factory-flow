@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FloatingNav from '@/components/FloatingNav';
 import Footer from '@/components/Footer';
+import InteractiveHoverText from '@/components/InteractiveHoverText';
 
 const WeddingPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,11 +28,19 @@ const WeddingPage = () => {
           </div>
           <div className="absolute inset-0 bg-black/40" />
           <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
-              Wedding by TMF
+            <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tight">
+              <InteractiveHoverText 
+                text="Wedding by TMF" 
+                primaryColor="text-accent"
+                hoverColor="text-primary"
+              />
             </h1>
-            <p className="text-xl md:text-3xl text-white/90 max-w-3xl font-light tracking-wide">
-              Stories of Love & Joy of Weddings
+            <p className="text-xl md:text-3xl max-w-3xl font-light tracking-wide">
+              <InteractiveHoverText 
+                text="Stories of Love & Joy of Weddings" 
+                primaryColor="text-primary"
+                hoverColor="text-accent"
+              />
             </p>
           </div>
         </div>

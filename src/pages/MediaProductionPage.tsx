@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FloatingNav from '@/components/FloatingNav';
 import Footer from '@/components/Footer';
+import InteractiveHoverText from '@/components/InteractiveHoverText';
 
 const MediaProductionPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,11 +22,19 @@ const MediaProductionPage = () => {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-20">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-primary mb-6 tracking-tight transition-transform duration-300 hover:scale-105">
-              Media <span className="text-accent">Production</span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight transition-transform duration-300 hover:scale-105">
+              <InteractiveHoverText 
+                text="Media Production" 
+                primaryColor="text-primary"
+                hoverColor="text-accent"
+              />
             </h1>
-            <p className="text-xl md:text-2xl text-primary/70 max-w-2xl tracking-wide transition-transform duration-300 hover:scale-105">
-              Cinematic storytelling for brands and artists
+            <p className="text-xl md:text-2xl max-w-2xl tracking-wide transition-transform duration-300 hover:scale-105">
+              <InteractiveHoverText 
+                text="Cinematic storytelling for brands and artists" 
+                primaryColor="text-primary/70"
+                hoverColor="text-accent"
+              />
             </p>
           </div>
 

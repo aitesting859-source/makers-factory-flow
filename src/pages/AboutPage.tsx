@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import FloatingNav from '@/components/FloatingNav';
 import Footer from '@/components/Footer';
 import { VelocityScroll } from '@/components/VelocityScroll';
+import InteractiveHoverText from '@/components/InteractiveHoverText';
 import aboutCorner1 from '@/assets/about-corner-1.jpg';
 import aboutCorner3 from '@/assets/about-corner-3.jpg';
 
@@ -74,22 +75,34 @@ const AboutPage = () => {
             variants={containerVariants}
           >
             <motion.h1 
-              className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black text-primary leading-none tracking-tighter"
+              className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black leading-none tracking-tighter"
               variants={itemVariants}
             >
-              THE
+              <InteractiveHoverText 
+                text="THE" 
+                primaryColor="text-primary"
+                hoverColor="text-accent"
+              />
             </motion.h1>
             <motion.h1 
-              className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black text-accent leading-none tracking-tighter -mt-12"
+              className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black leading-none tracking-tighter -mt-12"
               variants={itemVariants}
             >
-              MAKERS
+              <InteractiveHoverText 
+                text="MAKERS" 
+                primaryColor="text-accent"
+                hoverColor="text-primary"
+              />
             </motion.h1>
             <motion.h1 
-              className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black text-primary leading-none tracking-tighter -mt-12"
+              className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black leading-none tracking-tighter -mt-12"
               variants={itemVariants}
             >
-              FACTORY
+              <InteractiveHoverText 
+                text="FACTORY" 
+                primaryColor="text-primary"
+                hoverColor="text-accent"
+              />
             </motion.h1>
           </motion.div>
           

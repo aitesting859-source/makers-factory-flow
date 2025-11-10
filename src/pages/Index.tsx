@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FloatingNav from '@/components/FloatingNav';
 import Showreel from '@/components/Showreel';
 import ShowreelHeroText from '@/components/ShowreelHeroText';
+import ScrollFadeTitle from '@/components/ScrollFadeTitle';
 import AboutSection from '@/components/AboutSection';
 import WorksSection from '@/components/WorksSection';
 import PortfolioAbout from '@/components/PortfolioAbout';
@@ -28,6 +29,9 @@ const Index = () => {
       <main className="relative z-10">
         {/* Showreel Section */}
         <Showreel />
+        
+        {/* Title Below Showreel */}
+        <ScrollFadeTitle />
         
         {/* Showreel Hero Text */}
         <ShowreelHeroText />

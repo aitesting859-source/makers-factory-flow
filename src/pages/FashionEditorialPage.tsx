@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FloatingNav from '@/components/FloatingNav';
 import Footer from '@/components/Footer';
+import InteractiveHoverText from '@/components/InteractiveHoverText';
 
 const FashionEditorialPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -47,11 +48,19 @@ const FashionEditorialPage = () => {
 
             {/* Center Title */}
             <div className="text-center py-16">
-              <h1 className="text-6xl md:text-8xl font-serif text-primary mb-4 tracking-tight">
-                Fashion Editorial
+              <h1 className="text-6xl md:text-8xl font-serif mb-4 tracking-tight">
+                <InteractiveHoverText 
+                  text="Fashion Editorial" 
+                  primaryColor="text-primary"
+                  hoverColor="text-accent"
+                />
               </h1>
-              <p className="text-xl md:text-2xl text-primary/60 font-light tracking-wide italic mb-6">
-                stories told through style
+              <p className="text-xl md:text-2xl font-light tracking-wide italic mb-6">
+                <InteractiveHoverText 
+                  text="stories told through style" 
+                  primaryColor="text-primary/60"
+                  hoverColor="text-accent"
+                />
               </p>
               <div className="flex items-center justify-center gap-4 text-sm uppercase tracking-wider">
                 <span className="text-accent">CATEGORY</span>

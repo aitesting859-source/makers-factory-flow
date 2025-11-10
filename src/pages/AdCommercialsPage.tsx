@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import FloatingNav from '@/components/FloatingNav';
 import Footer from '@/components/Footer';
+import InteractiveHoverText from '@/components/InteractiveHoverText';
 
 const AdCommercialsPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -21,8 +22,12 @@ const AdCommercialsPage = () => {
         <div className="max-w-7xl mx-auto">
           {/* Large Centered Title */}
           <div className="text-center mb-32">
-            <h1 className="text-7xl md:text-9xl font-black text-primary tracking-tighter">
-              AD COMMERCIALS
+            <h1 className="text-7xl md:text-9xl font-black tracking-tighter">
+              <InteractiveHoverText 
+                text="AD COMMERCIALS" 
+                primaryColor="text-primary"
+                hoverColor="text-accent"
+              />
             </h1>
           </div>
 
