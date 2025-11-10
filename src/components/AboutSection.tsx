@@ -96,17 +96,19 @@ const AboutSection = () => {
           </p>
           
           <div className="h-px w-16 md:w-24 bg-accent mx-auto" />
-          
-          {/* Stats Section */}
-          <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto mt-16">
-            <div className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20">
-              <h4 className="text-4xl sm:text-5xl md:text-6xl font-black text-accent mb-3">50+</h4>
-              <p className="text-xs sm:text-sm text-primary/60 uppercase tracking-wider">Projects Completed</p>
-            </div>
-            <div className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20">
-              <h4 className="text-4xl sm:text-5xl md:text-6xl font-black text-accent mb-3">10+</h4>
-              <p className="text-xs sm:text-sm text-primary/60 uppercase tracking-wider">Years Experience</p>
-            </div>
+        </div>
+      </div>
+      
+      {/* Stats Section - Moved Below */}
+      <div className="max-w-7xl mx-auto px-4 pb-24">
+        <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20">
+            <h4 className="text-4xl sm:text-5xl md:text-6xl font-black text-accent mb-3">50+</h4>
+            <p className="text-xs sm:text-sm text-primary/60 uppercase tracking-wider">Projects Completed</p>
+          </div>
+          <div className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20">
+            <h4 className="text-4xl sm:text-5xl md:text-6xl font-black text-accent mb-3">10+</h4>
+            <p className="text-xs sm:text-sm text-primary/60 uppercase tracking-wider">Years Experience</p>
           </div>
         </div>
       </div>

@@ -59,11 +59,17 @@ const Footer = () => {
         {/* Social & Copyright */}
         <div className="border-t border-primary/20 pt-8">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-xs text-primary/60 tracking-widest">© 2025 THE MAKERS FACTORY. ALL RIGHTS RESERVED.</p>
+            <p className="text-xs text-primary/60 tracking-widest">© 2025 THE MAKERS FACTORY. ALL RIGHTS RESERVED BY CRAFTY HEADS.</p>
             
             <div className="flex gap-8 text-xs tracking-widest">
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-primary/60 hover:text-accent transition-colors">
                 INSTAGRAM
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-primary/60 hover:text-accent transition-colors">
+                FACEBOOK
+              </a>
+              <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="text-primary/60 hover:text-accent transition-colors">
+                BEHANCE
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-primary/60 hover:text-accent transition-colors">
                 LINKEDIN
