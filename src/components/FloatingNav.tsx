@@ -40,7 +40,7 @@ const FloatingNav = () => {
     { name: 'Media Production', path: '/works/media-production' },
     { name: 'Ad Commercials', path: '/works/ad-commercials' },
     { name: 'Fashion Editorial', path: '/works/fashion-editorial' },
-    { name: 'Fine Art Weddings', path: '/works/fine-art-weddings' },
+    { name: 'Wedding by TMF', path: '/works/fine-art-weddings' },
   ];
 
   const scrollToSection = (sectionId: string) => {
