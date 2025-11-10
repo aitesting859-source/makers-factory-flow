@@ -299,7 +299,7 @@ const AboutPage = () => {
                   whileHover={{ y: -8 }}
                 >
                   <div className="flex items-start gap-6">
-                    <span className="text-6xl font-black text-accent/20 group-hover:text-accent/40 transition-colors">
+                    <span className="text-6xl font-black text-accent/40 group-hover:text-accent/50 transition-colors" aria-hidden="true">
                       {service.number}
                     </span>
                     <div className="flex-1 space-y-4">

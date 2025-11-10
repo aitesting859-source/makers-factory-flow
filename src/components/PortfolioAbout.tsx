@@ -113,7 +113,7 @@ const PortfolioAbout = () => {
               },
             ].map((step, idx) => (
               <div key={idx} className="flex items-start gap-8 text-left">
-                <span className="text-6xl font-black text-accent/20 flex-shrink-0">
+                <span className="text-6xl font-black text-accent/40 flex-shrink-0" aria-hidden="true">
                   {step.number}
                 </span>
                 <div className="pt-2">

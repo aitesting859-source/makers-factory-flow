@@ -7,12 +7,12 @@ const Footer = () => {
       <ContactForm />
 
       {/* Continuous Marquee Animation */}
-      <div className="relative mt-16">
+      <div className="relative mt-16" aria-hidden="true">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(10)].map((_, i) => (
             <span
               key={i}
-              className="inline-block text-6xl md:text-8xl font-black text-primary/10 mx-8"
+              className="inline-block text-6xl md:text-8xl font-black text-primary/15 mx-8"
             >
               THE MAKERS FACTORY
             </span>
@@ -25,7 +25,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Write Us */}
           <div>
-            <h3 className="text-xs text-primary/50 tracking-widest mb-4">WRITE US</h3>
+            <h3 className="text-xs text-primary/65 tracking-widest mb-4">WRITE US</h3>
             <a 
               href="mailto:hello@themakersfactory.com" 
               className="text-lg text-primary hover:text-accent transition-colors font-bold"
@@ -36,7 +36,7 @@ const Footer = () => {
 
           {/* Talk to Us */}
           <div>
-            <h3 className="text-xs text-primary/50 tracking-widest mb-4">TALK TO US</h3>
+            <h3 className="text-xs text-primary/65 tracking-widest mb-4">TALK TO US</h3>
             <a 
               href="tel:+1234567890" 
               className="text-lg text-primary hover:text-accent transition-colors font-bold"
@@ -47,7 +47,7 @@ const Footer = () => {
 
           {/* Find Us */}
           <div>
-            <h3 className="text-xs text-primary/50 tracking-widest mb-4">FIND US</h3>
+            <h3 className="text-xs text-primary/65 tracking-widest mb-4">FIND US</h3>
             <address className="text-lg text-primary not-italic font-bold">
               CREATIVE STUDIOS<br />
               123 MAKER STREET<br />
