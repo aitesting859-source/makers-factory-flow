@@ -167,6 +167,10 @@ const FashionGallery = () => {
                   muted
                   playsInline
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Suppress error and hide video element
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
               ) : (
                 <img

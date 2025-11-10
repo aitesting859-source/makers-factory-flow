@@ -6,9 +6,16 @@ const Showreel = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [scrollOpacity, setScrollOpacity] = useState(1);
+  const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Handle video loading errors gracefully
+  const handleVideoError = () => {
+    setVideoError(true);
+    setIsLoaded(true); // Still mark as loaded to prevent loading state
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -72,15 +79,18 @@ const Showreel = () => {
     >
       {/* Full Background Video */}
       <div className="fixed inset-0 w-full h-full -z-10 pointer-events-none" style={{ opacity: scrollOpacity }}>
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src="/showreel.mp4" type="video/mp4" />
-        </video>
+        {!videoError && (
+          <video
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            onError={handleVideoError}
+          >
+            <source src="/showreel.mp4" type="video/mp4" />
+          </video>
+        )}
         <div className="absolute inset-0 bg-background/40" />
       </div>
       
@@ -95,18 +105,25 @@ const Showreel = () => {
         }`}
       >
         {/* Showreel Video */}
-        <video
-          ref={videoElementRef}
-          className="w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-          onLoadedData={() => setIsLoaded(true)}
-        >
-          <source src="/showreel.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+        {!videoError ? (
+          <video
+            ref={videoElementRef}
+            className="w-full h-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            onLoadedData={() => setIsLoaded(true)}
+            onError={handleVideoError}
+          >
+            <source src="/showreel.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-muted">
+            <p className="text-primary/60 text-center">Video content unavailable</p>
+          </div>
+        )}
         
         {/* Video Controls */}
         <VideoControls
