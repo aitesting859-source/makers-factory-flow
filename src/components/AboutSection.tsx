@@ -44,7 +44,7 @@ const AboutSection = () => {
       {/* Four Corner Images Layout */}
       <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 py-24 md:py-32">
         {/* Top Left Corner Image - Random offset */}
-        <div className="absolute top-4 sm:top-8 md:top-12 left-4 sm:left-6 md:left-10 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-2">
+        <div className="absolute top-4 sm:top-8 md:top-12 left-4 sm:left-6 md:left-10 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-2 opacity-60">
           <img 
             src={aboutCorner1} 
             alt="Visual storytelling" 
@@ -53,7 +53,7 @@ const AboutSection = () => {
         </div>
 
         {/* Top Right Corner Image - Random offset */}
-        <div className="absolute top-8 sm:top-12 md:top-16 right-2 sm:right-4 md:right-8 w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-60 lg:h-60 overflow-hidden transform -rotate-3">
+        <div className="absolute top-8 sm:top-12 md:top-16 right-2 sm:right-4 md:right-8 w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-60 lg:h-60 overflow-hidden transform -rotate-3 opacity-60">
           <img 
             src={aboutCorner2} 
             alt="Creative process" 
@@ -62,7 +62,7 @@ const AboutSection = () => {
         </div>
 
         {/* Bottom Left Corner Image - Random offset */}
-        <div className="absolute bottom-6 sm:bottom-10 md:bottom-14 left-2 sm:left-4 md:left-6 w-40 h-32 sm:w-48 sm:h-40 md:w-56 md:h-48 lg:w-64 lg:h-56 overflow-hidden transform -rotate-1">
+        <div className="absolute bottom-6 sm:bottom-10 md:bottom-14 left-2 sm:left-4 md:left-6 w-40 h-32 sm:w-48 sm:h-40 md:w-56 md:h-48 lg:w-64 lg:h-56 overflow-hidden transform -rotate-1 opacity-60">
           <img 
             src={aboutCorner3} 
             alt="Behind the scenes" 
@@ -71,7 +71,7 @@ const AboutSection = () => {
         </div>
 
         {/* Bottom Right Corner Image - Random offset */}
-        <div className="absolute bottom-4 sm:bottom-8 md:bottom-12 right-4 sm:right-8 md:right-12 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-3">
+        <div className="absolute bottom-4 sm:bottom-8 md:bottom-12 right-4 sm:right-8 md:right-12 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-3 opacity-60">
           <img 
             src={aboutCorner4} 
             alt="Final moments" 

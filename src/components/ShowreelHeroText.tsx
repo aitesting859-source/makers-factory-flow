@@ -12,11 +12,11 @@ const ShowreelHeroText = () => {
   return (
     <motion.section 
       ref={heroRef}
-      className="relative h-[60vh] flex items-center justify-center px-4 py-12"
+      className="relative min-h-[70vh] flex items-center justify-center px-4 py-12"
       style={{ opacity, y }}
     >
       <motion.div 
-        className="text-center space-y-2"
+        className="text-center space-y-6 max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
@@ -30,6 +30,20 @@ const ShowreelHeroText = () => {
         <p className="text-base sm:text-lg md:text-xl text-primary/60 tracking-wider uppercase pt-4">
           (Indie - Video Creators)
         </p>
+        
+        <div className="space-y-4 pt-8">
+          <p className="text-base sm:text-lg md:text-xl text-primary/80 leading-relaxed font-light">
+            We are a collective of indie creators pushing the boundaries of visual storytelling.
+          </p>
+          
+          <p className="text-base sm:text-lg md:text-xl text-primary/80 leading-relaxed font-light">
+            Our work spans media production, commercial advertising, fashion editorial, and wedding cinematography.
+          </p>
+          
+          <p className="text-base sm:text-lg md:text-xl text-primary/80 leading-relaxed font-light">
+            Each project is an opportunity to create something extraordinary.
+          </p>
+        </div>
       </motion.div>
     </motion.section>
   );
