@@ -72,7 +72,7 @@ const AboutSection = () => {
       </div>
 
       {/* Four Corner Images Layout */}
-      <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 py-24 md:py-32">
+      <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 py-8 md:py-12">
         {/* Top Left Corner Image - Random offset */}
         <div className="absolute top-4 sm:top-8 md:top-12 left-4 sm:left-6 md:left-10 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-2 opacity-60">
           <img 
