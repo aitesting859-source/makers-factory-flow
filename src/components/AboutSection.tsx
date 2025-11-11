@@ -117,19 +117,29 @@ const AboutSection = () => {
       <div ref={statsRef} className="max-w-7xl mx-auto px-4 pb-24">
         <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
           <motion.div 
-            className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20"
+            className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20 transition-colors duration-300 cursor-pointer"
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.6, delay: 0.1 }}
+            whileHover={{ 
+              scale: 1.05,
+              borderColor: "hsl(var(--accent))",
+              backgroundColor: "hsl(var(--accent) / 0.1)"
+            }}
           >
             <h4 className="text-4xl sm:text-5xl md:text-6xl font-black text-accent mb-3">50+</h4>
             <p className="text-xs sm:text-sm text-primary/60 uppercase tracking-wider">Projects Completed</p>
           </motion.div>
           <motion.div 
-            className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20"
+            className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20 transition-colors duration-300 cursor-pointer"
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.6, delay: 0.3 }}
+            whileHover={{ 
+              scale: 1.05,
+              borderColor: "hsl(var(--accent))",
+              backgroundColor: "hsl(var(--accent) / 0.1)"
+            }}
           >
             <h4 className="text-4xl sm:text-5xl md:text-6xl font-black text-accent mb-3">10+</h4>
             <p className="text-xs sm:text-sm text-primary/60 uppercase tracking-wider">Years Experience</p>
