@@ -7,8 +7,8 @@ const ScrollFadeTitle = () => {
   const { scrollY } = useScroll();
   
   // Fade out immediately on first scroll
-  const opacity = useTransform(scrollY, [0, 150], [1, 0]);
-  const y = useTransform(scrollY, [0, 150], [0, -30]);
+  const opacity = useTransform(scrollY, [0, 50], [1, 0]);
+  const y = useTransform(scrollY, [0, 50], [0, -20]);
 
   return (
     <motion.div 
