@@ -11,7 +11,7 @@ const ScrollAnimatedTitle = () => {
   const words = ["THE", "MAKERS", "FACTORY"];
   
   return (
-    <div ref={containerRef} className="relative min-h-[60vh] flex items-center justify-center">
+    <div ref={containerRef} className="relative min-h-[40vh] flex items-start justify-center pt-12">
       <div className="text-center space-y-4 px-4">
         {/* Animated Title */}
         <div className="space-y-2">
@@ -27,14 +27,14 @@ const ScrollAnimatedTitle = () => {
             
             const y = useTransform(
               scrollYProgress,
-              [start, start + 0.2, end],
-              [50, 0, 0]
+              [start, start + 0.15, end],
+              [30, 0, 0]
             );
             
             const scale = useTransform(
               scrollYProgress,
-              [start, start + 0.2, end],
-              [0.8, 1, 1]
+              [start, start + 0.15, end],
+              [0.9, 1, 1]
             );
 
             return (
@@ -54,8 +54,8 @@ const ScrollAnimatedTitle = () => {
         {/* Subtitle */}
         <motion.p
           style={{
-            opacity: useTransform(scrollYProgress, [0.6, 0.8], [0, 1]),
-            y: useTransform(scrollYProgress, [0.6, 0.8], [20, 0])
+            opacity: useTransform(scrollYProgress, [0.3, 0.45], [0, 1]),
+            y: useTransform(scrollYProgress, [0.3, 0.45], [15, 0])
           }}
           className="text-xs sm:text-sm md:text-base text-primary/60 tracking-wider uppercase"
         >
@@ -65,10 +65,10 @@ const ScrollAnimatedTitle = () => {
         {/* Description */}
         <motion.div
           style={{
-            opacity: useTransform(scrollYProgress, [0.7, 0.9], [0, 1]),
-            y: useTransform(scrollYProgress, [0.7, 0.9], [20, 0])
+            opacity: useTransform(scrollYProgress, [0.4, 0.55], [0, 1]),
+            y: useTransform(scrollYProgress, [0.4, 0.55], [15, 0])
           }}
-          className="space-y-3 pt-6 max-w-3xl mx-auto"
+          className="space-y-3 pt-4 max-w-3xl mx-auto"
         >
           <p className="text-sm sm:text-base md:text-lg text-primary/80 leading-relaxed font-light">
             We are a collective of indie creators pushing the boundaries of visual storytelling.
