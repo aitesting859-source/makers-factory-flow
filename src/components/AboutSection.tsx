@@ -1,16 +1,14 @@
-import { useEffect, useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import aboutCorner1 from '@/assets/about-corner-1.jpg';
 import aboutCorner2 from '@/assets/about-corner-2.jpg';
 import aboutCorner3 from '@/assets/about-corner-3.jpg';
 import aboutCorner4 from '@/assets/about-corner-4.jpg';
 import ScrollAnimatedTitle from './ScrollAnimatedTitle';
+import AnimatedStatsCard from './AnimatedStatsCard';
 
 const AboutSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [blurAmount, setBlurAmount] = useState(10);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(statsRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -90,36 +88,10 @@ const AboutSection = () => {
       </div>
       
       {/* Stats Section - Animated on Scroll */}
-      <div ref={statsRef} className="max-w-7xl mx-auto px-4 pb-24">
+      <div className="max-w-7xl mx-auto px-4 pb-24">
         <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
-          <motion.div 
-            className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20 transition-colors duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            whileHover={{ 
-              scale: 1.05,
-              borderColor: "hsl(var(--accent))",
-              backgroundColor: "hsl(var(--accent) / 0.1)"
-            }}
-          >
-            <h4 className="text-4xl sm:text-5xl md:text-6xl font-black text-accent mb-3">50+</h4>
-            <p className="text-xs sm:text-sm text-primary/60 uppercase tracking-wider">Projects Completed</p>
-          </motion.div>
-          <motion.div 
-            className="text-center p-6 sm:p-8 bg-gradient-to-br from-muted/50 to-background rounded-lg border border-primary/20 transition-colors duration-300 cursor-pointer"
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            whileHover={{ 
-              scale: 1.05,
-              borderColor: "hsl(var(--accent))",
-              backgroundColor: "hsl(var(--accent) / 0.1)"
-            }}
-          >
-            <h4 className="text-4xl sm:text-5xl md:text-6xl font-black text-accent mb-3">10+</h4>
-            <p className="text-xs sm:text-sm text-primary/60 uppercase tracking-wider">Years Experience</p>
-          </motion.div>
+          <AnimatedStatsCard value="50+" label="Projects Completed" delay={0} />
+          <AnimatedStatsCard value="10+" label="Years Experience" delay={0.15} />
         </div>
       </div>
     </section>
