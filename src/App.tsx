@@ -10,10 +10,17 @@ import CustomCursor from "./components/CustomCursor";
 const Index = lazy(() => import("./pages/Index"));
 const AdCommercialsPage = lazy(() => import("./pages/AdCommercialsPage"));
 const FashionEditorialPage = lazy(() => import("./pages/FashionEditorialPage"));
-const WeddingPage = lazy(() => import("./pages/WeddingPage"));
 const MediaProductionPage = lazy(() => import("./pages/MediaProductionPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+
+// Wedding pages
+const WeddingLayout = lazy(() => import("./pages/wedding/WeddingLayout"));
+const WeddingPhotos = lazy(() => import("./pages/wedding/WeddingPhotos"));
+const WeddingFilms = lazy(() => import("./pages/wedding/WeddingFilms"));
+const WeddingStory = lazy(() => import("./pages/wedding/WeddingStory"));
+const WeddingFilmDetail = lazy(() => import("./pages/wedding/WeddingFilmDetail"));
+const WeddingBlog = lazy(() => import("./pages/wedding/WeddingBlog"));
 
 const queryClient = new QueryClient();
 
@@ -30,8 +37,17 @@ const App = () => (
             <Route path="/about" element={<AboutPage />} />
             <Route path="/works/ad-commercials" element={<AdCommercialsPage />} />
             <Route path="/works/fashion-editorial" element={<FashionEditorialPage />} />
-            <Route path="/works/wedding-by-tmf" element={<WeddingPage />} />
             <Route path="/works/media-production" element={<MediaProductionPage />} />
+            
+            {/* Wedding by TMF - Nested Routes */}
+            <Route path="/works/wedding-by-tmf" element={<WeddingLayout />}>
+              <Route index element={<WeddingPhotos />} />
+              <Route path="films" element={<WeddingFilms />} />
+              <Route path="films/:filmId" element={<WeddingFilmDetail />} />
+              <Route path="story/:storyId" element={<WeddingStory />} />
+              <Route path="blog/:blogId" element={<WeddingBlog />} />
+            </Route>
+            
             {/* Redirect old fine-art-weddings route to new wedding-by-tmf */}
             <Route path="/works/fine-art-weddings" element={<Navigate to="/works/wedding-by-tmf" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
