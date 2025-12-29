@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Play } from 'lucide-react';
@@ -57,17 +56,10 @@ const filmStories: FilmStory[] = [
   },
 ];
 
-const categories = ['All', 'Classic Story Telling', 'New Age Modern', 'Intimates'];
-
 const WeddingFilms = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
-  const filteredFilms = selectedCategory === 'All' 
-    ? filmStories 
-    : filmStories.filter(film => film.category === selectedCategory);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen font-['Montserrat']">
       {/* Hero Section with Video Background */}
       <div className="relative h-[60vh] bg-[#1a1a1a] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a]/80 to-[#1a1a1a]" />
@@ -83,34 +75,9 @@ const WeddingFilms = () => {
 
       {/* Content Section */}
       <div className="bg-[#f5f0e8] py-16 px-8">
-        {/* Category Filter */}
-        <motion.div 
-          className="flex flex-wrap justify-center gap-4 mb-16 max-w-4xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          {categories.map((category, index) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`text-sm uppercase tracking-wider transition-all duration-300 pb-1 ${
-                selectedCategory === category 
-                  ? 'text-[#d4a574] border-b-2 border-[#d4a574]' 
-                  : 'text-[#1a1a1a]/60 hover:text-[#1a1a1a]'
-              }`}
-            >
-              {category}
-              {index < categories.length - 1 && (
-                <span className="ml-4 text-[#1a1a1a]/20">|</span>
-              )}
-            </button>
-          ))}
-        </motion.div>
-
         {/* Films Grid */}
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {filteredFilms.map((film, index) => (
+          {filmStories.map((film, index) => (
             <motion.div
               key={film.id}
               initial={{ opacity: 0, y: 40 }}
