@@ -21,7 +21,7 @@ const WeddingLayout = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f5f0e8]">
+    <div className="min-h-screen bg-[#f5f0e8] font-['Montserrat']">
       {/* Back to main site */}
       <Link 
         to="/" 

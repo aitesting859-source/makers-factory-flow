@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -69,17 +68,10 @@ const photoStories: PhotoStory[] = [
   },
 ];
 
-const categories = ['All', 'Indian', 'International'];
-
 const WeddingPhotos = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
-  const filteredStories = selectedCategory === 'All' 
-    ? photoStories 
-    : photoStories.filter(story => story.category === selectedCategory);
 
   return (
-    <div className="min-h-screen pt-24 pb-16 px-8">
+    <div className="min-h-screen pt-24 pb-16 px-8 font-['Montserrat']">
       {/* Hero Section */}
       <motion.div 
         className="max-w-4xl mx-auto text-center mb-20"
@@ -96,35 +88,9 @@ const WeddingPhotos = () => {
         </p>
       </motion.div>
 
-      {/* Category Filter */}
-      <motion.div 
-        className="flex justify-center gap-4 mb-16"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        <span className="text-[#1a1a1a]/40 text-sm uppercase tracking-wider self-center mr-4">Select:</span>
-        {categories.map((category, index) => (
-          <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            className={`text-sm uppercase tracking-wider transition-all duration-300 pb-1 ${
-              selectedCategory === category 
-                ? 'text-[#d4a574] border-b-2 border-[#d4a574]' 
-                : 'text-[#1a1a1a]/60 hover:text-[#1a1a1a]'
-            }`}
-          >
-            {category}
-            {index < categories.length - 1 && (
-              <span className="ml-4 text-[#1a1a1a]/20">|</span>
-            )}
-          </button>
-        ))}
-      </motion.div>
-
       {/* Photo Grid */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {filteredStories.map((story, index) => (
+        {photoStories.map((story, index) => (
           <motion.div
             key={story.id}
             initial={{ opacity: 0, y: 40 }}
