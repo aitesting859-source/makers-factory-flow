@@ -16,6 +16,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Wedding pages
 const WeddingLayout = lazy(() => import("./pages/wedding/WeddingLayout"));
+const WeddingLanding = lazy(() => import("./pages/wedding/WeddingLanding"));
 const WeddingPhotos = lazy(() => import("./pages/wedding/WeddingPhotos"));
 const WeddingFilms = lazy(() => import("./pages/wedding/WeddingFilms"));
 const WeddingStory = lazy(() => import("./pages/wedding/WeddingStory"));
@@ -41,7 +42,8 @@ const App = () => (
             
             {/* Wedding by TMF - Nested Routes */}
             <Route path="/works/wedding-by-tmf" element={<WeddingLayout />}>
-              <Route index element={<WeddingPhotos />} />
+              <Route index element={<WeddingLanding />} />
+              <Route path="photos" element={<WeddingPhotos />} />
               <Route path="films" element={<WeddingFilms />} />
               <Route path="films/:filmId" element={<WeddingFilmDetail />} />
               <Route path="story/:storyId" element={<WeddingStory />} />
