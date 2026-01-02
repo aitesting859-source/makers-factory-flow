@@ -16,7 +16,7 @@ const WeddingLayout = () => {
   }, []);
 
   const navItems = [
-    { path: '/works/wedding-by-tmf', label: 'Photos', icon: Camera, exact: true },
+    { path: '/works/wedding-by-tmf/photos', label: 'Photos', icon: Camera, exact: false },
     { path: '/works/wedding-by-tmf/films', label: 'Films', icon: Film, exact: false },
   ];
 
