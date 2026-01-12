@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Camera, Film, ArrowLeft } from 'lucide-react';
+import { Camera, Film, ArrowLeft, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const WeddingLayout = () => {
@@ -16,6 +16,7 @@ const WeddingLayout = () => {
   }, []);
 
   const navItems = [
+    { path: '/works/wedding-by-tmf', label: 'Home', icon: Home, exact: true },
     { path: '/works/wedding-by-tmf/photos', label: 'Photos', icon: Camera, exact: false },
     { path: '/works/wedding-by-tmf/films', label: 'Films', icon: Film, exact: false },
   ];
