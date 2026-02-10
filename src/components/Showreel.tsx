@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import VideoControls from './VideoControls';
+import { useMediaConfig } from '@/lib/mediaConfig';
 
 const Showreel = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -10,6 +11,8 @@ const Showreel = () => {
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { getMediaValue } = useMediaConfig();
+  const showreelVideo = getMediaValue('global.showreelVideo', '/showreel.mp4');
 
   // Handle video loading errors gracefully
   const handleVideoError = () => {
@@ -88,7 +91,7 @@ const Showreel = () => {
             playsInline
             onError={handleVideoError}
           >
-            <source src="/showreel.mp4" type="video/mp4" />
+            <source src={showreelVideo} type="video/mp4" />
           </video>
         )}
         <div className="absolute inset-0 bg-background/40" />
@@ -116,7 +119,7 @@ const Showreel = () => {
             onLoadedData={() => setIsLoaded(true)}
             onError={handleVideoError}
           >
-            <source src="/showreel.mp4" type="video/mp4" />
+            <source src={showreelVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (

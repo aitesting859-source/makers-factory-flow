@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Play } from 'lucide-react';
+import { useMediaConfig } from '@/lib/mediaConfig';
 
 interface FilmStory {
   id: string;
@@ -57,6 +58,7 @@ const filmStories: FilmStory[] = [
 ];
 
 const WeddingFilms = () => {
+  const { resolveMediaUrl } = useMediaConfig();
 
   return (
     <div className="min-h-screen font-['Montserrat']">
@@ -88,7 +90,7 @@ const WeddingFilms = () => {
               <Link to={`/works/wedding-by-tmf/films/${film.id}`}>
                 <div className="relative aspect-video overflow-hidden mb-4">
                   <img 
-                    src={film.thumbnail} 
+                    src={resolveMediaUrl(film.thumbnail)} 
                     alt={film.couple}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />

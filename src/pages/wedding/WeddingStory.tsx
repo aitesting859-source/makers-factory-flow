@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, MapPin, Heart } from 'lucide-react';
+import { useMediaConfig } from '@/lib/mediaConfig';
 
 const stories = {
   'priya-arjun': {
@@ -44,6 +45,7 @@ Their first look was pure magic—a moment of overwhelming emotion as Michael sa
 
 const WeddingStory = () => {
   const { storyId } = useParams();
+  const { resolveMediaUrl } = useMediaConfig();
   const story = stories[storyId as keyof typeof stories];
 
   if (!story) {
@@ -64,7 +66,7 @@ const WeddingStory = () => {
       {/* Hero Image */}
       <div className="relative h-[70vh]">
         <img 
-          src={story.images[0]} 
+          src={resolveMediaUrl(story.images[0])} 
           alt={story.couple}
           className="w-full h-full object-cover"
         />
@@ -166,7 +168,7 @@ const WeddingStory = () => {
               className={`overflow-hidden rounded-lg ${index === 0 ? 'md:row-span-2' : ''}`}
             >
               <img 
-                src={image} 
+                src={resolveMediaUrl(image)} 
                 alt={`${story.couple} - ${index + 1}`}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
