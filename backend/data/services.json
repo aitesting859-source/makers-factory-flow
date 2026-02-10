@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ad-commercials",
+    "title": "Ad Commercials",
+    "description": "Concept-to-screen commercials for fashion and lifestyle brands.",
+    "slug": "works/ad-commercials"
+  },
+  {
+    "id": "fashion-editorial",
+    "title": "Fashion Editorial",
+    "description": "Editorial storytelling across stills and motion for campaigns.",
+    "slug": "works/fashion-editorial"
+  },
+  {
+    "id": "media-production",
+    "title": "Media Production",
+    "description": "End-to-end production support for digital and social content.",
+    "slug": "works/media-production"
+  },
+  {
+    "id": "wedding-by-tmf",
+    "title": "Wedding by TMF",
+    "description": "Fine-art wedding photography and films with story-driven direction.",
+    "slug": "works/wedding-by-tmf"
+  }
+]

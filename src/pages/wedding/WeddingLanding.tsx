@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
+import { useMediaConfig } from '@/lib/mediaConfig';
 
 const WeddingLanding = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,14 +13,18 @@ const WeddingLanding = () => {
   const videoScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.2]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
-  const galleryImages = [
-    "https://images.unsplash.com/photo-1519741497674-611481863552?w=800",
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800",
-    "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800",
-    "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800",
-    "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800",
-    "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800",
-  ];
+  const { getMediaValue } = useMediaConfig();
+  const galleryImages = getMediaValue('wedding.landing.gallery', [
+    'https://images.unsplash.com/photo-1519741497674-611481863552?w=800',
+    'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800',
+    'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800',
+    'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800',
+    'https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800',
+    'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800',
+  ]);
+  const showreelVideo = getMediaValue('global.showreelVideo', '/showreel.mp4');
+  const stackedTopImage = getMediaValue('wedding.landing.stackedTop', 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600');
+  const stackedBottomImage = getMediaValue('wedding.landing.stackedBottom', 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600');
 
   return (
     <div ref={containerRef} className="min-h-screen">
@@ -142,7 +147,7 @@ const WeddingLanding = () => {
                   playsInline
                   className="w-full h-full object-cover"
                 >
-                  <source src="/showreel.mp4" type="video/mp4" />
+                  <source src={showreelVideo} type="video/mp4" />
                 </video>
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/30 to-transparent" />
@@ -226,7 +231,7 @@ const WeddingLanding = () => {
             {/* Stacked images */}
             <div className="relative h-[500px]">
               <motion.img
-                src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600"
+                src={stackedTopImage}
                 alt="Wedding"
                 className="absolute top-0 right-0 w-3/4 h-[300px] object-cover shadow-2xl"
                 initial={{ x: 50, opacity: 0 }}
@@ -235,7 +240,7 @@ const WeddingLanding = () => {
                 transition={{ delay: 0.3 }}
               />
               <motion.img
-                src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600"
+                src={stackedBottomImage}
                 alt="Wedding"
                 className="absolute bottom-0 left-0 w-3/4 h-[300px] object-cover shadow-2xl border-4 border-[#1a1a1a]"
                 initial={{ x: -50, opacity: 0 }}
@@ -315,7 +320,7 @@ const WeddingLanding = () => {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/showreel.mp4" type="video/mp4" />
+            <source src={showreelVideo} type="video/mp4" />
           </video>
         </div>
 

@@ -1,0 +1,81 @@
+[
+  {
+    "key": "global.showreelVideo",
+    "description": "Main showreel video used across hero/background sections.",
+    "usedIn": [
+      "src/components/Showreel.tsx",
+      "src/pages/wedding/WeddingLanding.tsx"
+    ]
+  },
+  {
+    "key": "about.corner1",
+    "description": "Top-left style/hero image in About sections.",
+    "usedIn": [
+      "src/components/AboutSection.tsx",
+      "src/pages/AboutPage.tsx"
+    ]
+  },
+  {
+    "key": "about.corner2",
+    "description": "Top-right image in About section collage.",
+    "usedIn": [
+      "src/components/AboutSection.tsx"
+    ]
+  },
+  {
+    "key": "about.corner3",
+    "description": "Bottom/large image in About sections.",
+    "usedIn": [
+      "src/components/AboutSection.tsx",
+      "src/pages/AboutPage.tsx"
+    ]
+  },
+  {
+    "key": "about.corner4",
+    "description": "Bottom-right image in About section collage.",
+    "usedIn": [
+      "src/components/AboutSection.tsx"
+    ]
+  },
+  {
+    "key": "wedding.landing.gallery",
+    "description": "Gallery preview image strip on Wedding landing page.",
+    "usedIn": [
+      "src/pages/wedding/WeddingLanding.tsx"
+    ]
+  },
+  {
+    "key": "wedding.landing.stackedTop",
+    "description": "Top image in stacked collage on Wedding landing.",
+    "usedIn": [
+      "src/pages/wedding/WeddingLanding.tsx"
+    ]
+  },
+  {
+    "key": "wedding.landing.stackedBottom",
+    "description": "Bottom image in stacked collage on Wedding landing.",
+    "usedIn": [
+      "src/pages/wedding/WeddingLanding.tsx"
+    ]
+  },
+  {
+    "key": "fashion.galleryVideos",
+    "description": "Video pool for random video tiles in Fashion gallery.",
+    "usedIn": [
+      "src/components/FashionGallery.tsx"
+    ]
+  },
+  {
+    "key": "replacements",
+    "description": "Global URL-to-URL map. Any matching media URL on wedding pages/fashion/about gets replaced.",
+    "usedIn": [
+      "src/lib/mediaConfig.ts",
+      "src/pages/wedding/WeddingPhotos.tsx",
+      "src/pages/wedding/WeddingFilms.tsx",
+      "src/pages/wedding/WeddingStory.tsx",
+      "src/pages/wedding/WeddingBlog.tsx",
+      "src/pages/wedding/WeddingFilmDetail.tsx",
+      "src/components/FashionGallery.tsx"
+    ]
+  }
+]

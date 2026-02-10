@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useMediaConfig } from '@/lib/mediaConfig';
 
 interface MediaItem {
   id: number;
@@ -46,7 +47,7 @@ const generatePosition = (width: number, height: number, existingItems: MediaIte
 };
 
 // Sample data - replace with your actual images/videos
-const generateMediaItems = (): MediaItem[] => {
+const generateMediaItems = (videoSources: string[], resolveMediaUrl: (url: string) => string): MediaItem[] => {
   const shapes = ['square', 'portrait', 'landscape', 'wide'] as const;
   const shoots = [
     { title: 'Spring Collection', models: ['Sofia M.', 'Elena K.', 'Maria L.'] },
@@ -87,7 +88,7 @@ const generateMediaItems = (): MediaItem[] => {
     items.push({
       id: i,
       type: isVideo ? 'video' : 'image',
-      src: isVideo ? '/showreel.mp4' : `https://images.unsplash.com/photo-${1500000000000 + i * 100000}?w=${width}&h=${height}&fit=crop`,
+      src: isVideo ? resolveMediaUrl(videoSources[Math.floor(Math.random() * videoSources.length)] || '/showreel.mp4') : resolveMediaUrl(`https://images.unsplash.com/photo-${1500000000000 + i * 100000}?w=${width}&h=${height}&fit=crop`),
       shootTitle: shoot.title,
       modelName: shoot.models[Math.floor(Math.random() * shoot.models.length)],
       width,
@@ -102,7 +103,9 @@ const generateMediaItems = (): MediaItem[] => {
 };
 
 const FashionGallery = () => {
-  const [items] = useState<MediaItem[]>(generateMediaItems());
+  const { getMediaValue, resolveMediaUrl } = useMediaConfig();
+  const videoSources = getMediaValue('fashion.galleryVideos', ['/showreel.mp4']);
+  const [items] = useState<MediaItem[]>(generateMediaItems(videoSources, resolveMediaUrl));
   const [offsetX, setOffsetX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState(0);

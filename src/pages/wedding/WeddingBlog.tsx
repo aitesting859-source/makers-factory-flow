@@ -98,6 +98,7 @@ const blogs = {
 
 const WeddingBlog = () => {
   const { blogId } = useParams();
+  const { resolveMediaUrl } = useMediaConfig();
   const blog = blogs[blogId as keyof typeof blogs];
 
   if (!blog) {
@@ -118,7 +119,7 @@ const WeddingBlog = () => {
       {/* Hero */}
       <div className="relative h-[60vh]">
         <img 
-          src={blog.coverImage} 
+          src={resolveMediaUrl(blog.coverImage)} 
           alt={blog.title}
           className="w-full h-full object-cover"
         />
@@ -198,7 +199,7 @@ const WeddingBlog = () => {
                 return (
                   <figure key={index} className="my-10">
                     <img 
-                      src={block.src} 
+                      src={resolveMediaUrl(block.src)} 
                       alt={block.caption}
                       className="w-full rounded-lg"
                     />

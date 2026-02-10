@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, MapPin, Clock, Play } from 'lucide-react';
+import { useMediaConfig } from '@/lib/mediaConfig';
 
 const films = {
   'priya-arjun-film': {
@@ -37,6 +38,7 @@ The Tuscan landscape became a character in itself, with rolling hills and golden
 
 const WeddingFilmDetail = () => {
   const { filmId } = useParams();
+  const { resolveMediaUrl } = useMediaConfig();
   const film = films[filmId as keyof typeof films];
 
   if (!film) {
@@ -58,7 +60,7 @@ const WeddingFilmDetail = () => {
       <div className="relative bg-[#1a1a1a]">
         <div className="aspect-video max-w-6xl mx-auto">
           <iframe
-            src={film.videoUrl}
+            src={resolveMediaUrl(film.videoUrl)}
             className="w-full h-full"
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useMediaConfig } from '@/lib/mediaConfig';
 
 interface PhotoStory {
   id: string;
@@ -69,6 +70,7 @@ const photoStories: PhotoStory[] = [
 ];
 
 const WeddingPhotos = () => {
+  const { resolveMediaUrl } = useMediaConfig();
 
   return (
     <div className="min-h-screen pt-24 pb-16 px-8 font-['Montserrat']">
@@ -101,7 +103,7 @@ const WeddingPhotos = () => {
             <Link to={`/works/wedding-by-tmf/story/${story.id}`}>
               <div className="relative aspect-[3/4] overflow-hidden mb-4">
                 <img 
-                  src={story.image} 
+                  src={resolveMediaUrl(story.image)} 
                   alt={story.couple}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />

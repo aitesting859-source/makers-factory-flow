@@ -3,10 +3,16 @@ import aboutCorner1 from '@/assets/about-corner-1.jpg';
 import aboutCorner2 from '@/assets/about-corner-2.jpg';
 import aboutCorner3 from '@/assets/about-corner-3.jpg';
 import aboutCorner4 from '@/assets/about-corner-4.jpg';
+import { useMediaConfig } from '@/lib/mediaConfig';
 import ScrollAnimatedTitle from './ScrollAnimatedTitle';
 import AnimatedStatsCard from './AnimatedStatsCard';
 
 const AboutSection = () => {
+  const { getMediaValue } = useMediaConfig();
+  const aboutCorner1Image = getMediaValue('about.corner1', aboutCorner1);
+  const aboutCorner2Image = getMediaValue('about.corner2', aboutCorner2);
+  const aboutCorner3Image = getMediaValue('about.corner3', aboutCorner3);
+  const aboutCorner4Image = getMediaValue('about.corner4', aboutCorner4);
   const [isLoaded, setIsLoaded] = useState(false);
   const [blurAmount, setBlurAmount] = useState(10);
 
@@ -48,7 +54,7 @@ const AboutSection = () => {
         {/* Top Left Corner Image */}
         <div className="absolute top-4 sm:top-8 md:top-12 left-4 sm:left-6 md:left-10 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-2 opacity-60">
           <img 
-            src={aboutCorner1} 
+            src={aboutCorner1Image} 
             alt="Visual storytelling" 
             className="w-full h-full object-cover"
           />
@@ -57,7 +63,7 @@ const AboutSection = () => {
         {/* Top Right Corner Image */}
         <div className="absolute top-8 sm:top-12 md:top-16 right-2 sm:right-4 md:right-8 w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-60 lg:h-60 overflow-hidden transform -rotate-3 opacity-60">
           <img 
-            src={aboutCorner2} 
+            src={aboutCorner2Image} 
             alt="Creative process" 
             className="w-full h-full object-cover"
           />
@@ -66,7 +72,7 @@ const AboutSection = () => {
         {/* Bottom Left Corner Image */}
         <div className="absolute bottom-6 sm:bottom-10 md:bottom-14 left-2 sm:left-4 md:left-6 w-40 h-32 sm:w-48 sm:h-40 md:w-56 md:h-48 lg:w-64 lg:h-56 overflow-hidden transform -rotate-1 opacity-60">
           <img 
-            src={aboutCorner3} 
+            src={aboutCorner3Image} 
             alt="Behind the scenes" 
             className="w-full h-full object-cover"
           />
@@ -75,7 +81,7 @@ const AboutSection = () => {
         {/* Bottom Right Corner Image */}
         <div className="absolute bottom-4 sm:bottom-8 md:bottom-12 right-4 sm:right-8 md:right-12 w-32 h-40 sm:w-40 sm:h-48 md:w-48 md:h-56 lg:w-56 lg:h-64 overflow-hidden transform rotate-3 opacity-60">
           <img 
-            src={aboutCorner4} 
+            src={aboutCorner4Image} 
             alt="Final moments" 
             className="w-full h-full object-cover"
           />

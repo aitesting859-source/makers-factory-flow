@@ -6,6 +6,7 @@ import { VelocityScroll } from '@/components/VelocityScroll';
 import InteractiveHoverText from '@/components/InteractiveHoverText';
 import aboutCorner1 from '@/assets/about-corner-1.jpg';
 import aboutCorner3 from '@/assets/about-corner-3.jpg';
+import { useMediaConfig } from '@/lib/mediaConfig';
 
 const AboutPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -14,6 +15,10 @@ const AboutPage = () => {
   // Fade out hero text when scrolling down, fade in when scrolling up
   const heroOpacity = useTransform(scrollY, [0, 500, 1000], [1, 0.5, 0]);
   const heroY = useTransform(scrollY, [0, 500], [0, -150]);
+
+  const { getMediaValue } = useMediaConfig();
+  const aboutCorner1Image = getMediaValue('about.corner1', aboutCorner1);
+  const aboutCorner3Image = getMediaValue('about.corner3', aboutCorner3);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -129,7 +134,7 @@ const AboutPage = () => {
               variants={imageVariants}
             >
               <motion.img 
-                src={aboutCorner1} 
+                src={aboutCorner1Image} 
                 alt="Visual storytelling" 
                 className="w-full h-full object-cover"
                 whileHover={{ scale: 1.05 }}
@@ -212,7 +217,7 @@ const AboutPage = () => {
             variants={imageVariants}
           >
             <motion.img 
-              src={aboutCorner3} 
+              src={aboutCorner3Image} 
               alt="Behind the scenes" 
               className="w-full h-full object-cover"
               whileHover={{ scale: 1.05 }}
