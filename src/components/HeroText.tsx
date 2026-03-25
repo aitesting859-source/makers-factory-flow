@@ -1,6 +1,12 @@
+// components/ShowreelHeroText.tsx
 import { useEffect, useRef, useState } from 'react';
 
-const HeroText = () => {
+interface HeroTextProps {
+  title?: string;        // e.g. "THE MAKERS\nFACTORY"
+  subtitle?: string;     // e.g. "indie video creators"
+}
+
+const ShowreelHeroText = ({ title = "THE MAKERS\nFACTORY", subtitle = "indie video creators" }: HeroTextProps) => {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -11,48 +17,60 @@ const HeroText = () => {
         const rect = heroRef.current.getBoundingClientRect();
         const scrollProgress = Math.min(Math.max((window.scrollY - 500) / 500, 0), 1);
         setScrollY(scrollProgress * 100);
-        
+
         if (rect.top < window.innerHeight && rect.bottom > 0) {
           setIsVisible(true);
         }
       }
     };
 
+    // Initial visibility
     setTimeout(() => setIsVisible(true), 500);
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Split title by newline for multi-line support from CMS
+  const titleLines = title.split('\n');
+
   return (
-    <section 
+    <section
       ref={heroRef}
       className="relative min-h-screen flex flex-col items-center justify-center px-4 py-32 border-t border-border/20"
       style={{ transform: `translateY(-${scrollY}px)` }}
     >
-      {/* Main Hero Text */}
+      {/* Main Hero Text - Fully Dynamic */}
       <h1
         className={`text-center transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
         <div className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-none">
-          <span className="block text-primary">THE MAKERS</span>
-          <span className="block text-accent mt-2">FACTORY</span>
+          {titleLines.map((line, index) => (
+            <span
+              key={index}
+              className={`block ${index === 0 ? 'text-primary' : 'text-accent mt-2'}`}
+            >
+              {line.trim()}
+            </span>
+          ))}
         </div>
       </h1>
 
-      {/* Subhero Text */}
-      <div
-        className={`mt-12 text-center transition-all duration-1000 delay-300 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <p className="text-2xl md:text-4xl font-bold text-primary/70 tracking-wider">
-          indie video creators
-        </p>
-      </div>
+      {/* Subhero Text - Dynamic */}
+      {subtitle && (
+        <div
+          className={`mt-12 text-center transition-all duration-1000 delay-300 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <p className="text-2xl md:text-4xl font-bold text-primary/70 tracking-wider">
+            {subtitle}
+          </p>
+        </div>
+      )}
 
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -63,4 +81,4 @@ const HeroText = () => {
   );
 };
 
-export default HeroText;
+export default ShowreelHeroText;

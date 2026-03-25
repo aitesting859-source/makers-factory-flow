@@ -38,10 +38,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xs text-primary/65 tracking-widest mb-4">TALK TO US</h3>
             <a 
-              href="tel:+1234567890" 
+              href="tel:+977 9825181413" 
               className="text-lg text-primary hover:text-accent transition-colors font-bold"
             >
-              +1 (234) 567 890
+              +977 9825181413
             </a>
           </div>
 
@@ -49,9 +49,9 @@ const Footer = () => {
           <div>
             <h3 className="text-xs text-primary/65 tracking-widest mb-4">FIND US</h3>
             <address className="text-lg text-primary not-italic font-bold">
-              CREATIVE STUDIOS<br />
-              123 MAKER STREET<br />
-              NEW YORK, NY 10001
+              THE MAKERS FACTORY<br />
+              NAYA BAZAR<br />
+              POKHARA, NP 33700
             </address>
           </div>
         </div>
@@ -59,10 +59,10 @@ const Footer = () => {
         {/* Social & Copyright */}
         <div className="border-t border-primary/20 pt-8">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-xs text-primary/60 tracking-widest">© 2025 THE MAKERS FACTORY. ALL RIGHTS RESERVED BY CRAFTY HEADS.</p>
+            <p className="text-xs text-primary/60 tracking-widest">© 2026 THE MAKERS FACTORY. ALL RIGHTS RESERVED BY CRAFTY HEADS.</p>
             
             <div className="flex gap-8 text-xs tracking-widest">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-primary/60 hover:text-accent transition-colors">
+              <a href="https://www.instagram.com/themakersfactoryofficial/" target="_blank" rel="noopener noreferrer" className="text-primary/60 hover:text-accent transition-colors">
                 INSTAGRAM
               </a>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-primary/60 hover:text-accent transition-colors">

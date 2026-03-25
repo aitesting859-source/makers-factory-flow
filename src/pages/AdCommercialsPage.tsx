@@ -2,68 +2,101 @@ import { useEffect, useState } from 'react';
 import FloatingNav from '@/components/FloatingNav';
 import Footer from '@/components/Footer';
 import InteractiveHoverText from '@/components/InteractiveHoverText';
+import { usePageContent } from '@/hooks/usePageContent';
 
 const AdCommercialsPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const { sections, loading } = usePageContent('ad-commercials');
+
+  const getText = (id: string): string =>
+    sections?.find((s: any) => s.section_id === id)?.text_value || '';
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 300);
+    const timer = setTimeout(() => setIsLoaded(true), 300);
     return () => clearTimeout(timer);
   }, []);
+
+  // ✅ All project sections — any section that is NOT page-title
+  const projects = sections?.filter((s: any) => s.section_id !== 'page-title') || [];
 
   return (
     <div className="relative min-h-screen bg-background">
       <div className="grain-overlay" />
       <FloatingNav />
-      
+
       <main className={`relative z-10 px-4 py-32 min-h-screen blur-load ${isLoaded ? 'loaded' : ''}`}>
         <div className="max-w-7xl mx-auto">
-          {/* Large Centered Title */}
+
+          {/* TITLE */}
           <div className="text-center mb-32">
             <h1 className="text-7xl md:text-9xl font-black tracking-tighter">
-              <InteractiveHoverText 
-                text="AD COMMERCIALS" 
+              <InteractiveHoverText
+                text={getText('page-title') || 'AD COMMERCIALS'}
                 primaryColor="text-primary"
                 hoverColor="text-accent"
               />
             </h1>
           </div>
 
-          {/* Project List */}
-          <div className="space-y-8">
-            {[
-              { title: 'LUXURY BRAND CAMPAIGN', client: 'PREMIUM BRANDS', duration: '90"', ratio: '16:9' },
-              { title: 'TECH PRODUCT LAUNCH', client: 'INNOVATION CO', duration: '60"', ratio: '2.39:1' },
-              { title: 'FASHION COLLECTION', client: 'HAUTE COUTURE', duration: '45"', ratio: '4:3' },
-              { title: 'AUTOMOTIVE SHOWCASE', client: 'LUXURY MOTORS', duration: '120"', ratio: '16:9' },
-              { title: 'LIFESTYLE BRAND', client: 'MODERN LIVING', duration: '30"', ratio: '1:1' },
-              { title: 'CORPORATE IDENTITY', client: 'GLOBAL ENTERPRISE', duration: '75"', ratio: '16:9' },
-            ].map((project, idx) => (
-              <div key={idx} className="group">
-                {/* Project Metadata Row */}
-                <div className="grid grid-cols-4 gap-4 text-primary/60 text-sm uppercase tracking-wider mb-4 px-4">
-                  <div className="col-span-2">{project.title}</div>
-                  <div>{project.client}</div>
-                  <div className="flex justify-between">
-                    <span>{project.duration}</span>
-                    <span>{project.ratio}</span>
+          {/* LOADING */}
+          {loading && (
+            <div className="text-center text-xl font-bold py-20">Loading...</div>
+          )}
+
+          {/* PROJECTS */}
+          {!loading && (
+            <div className="space-y-8">
+              {projects.map((section: any, idx: number) => (
+                <div key={section.id} className="group">
+
+                  {/* Metadata */}
+                  <div className="grid grid-cols-4 gap-4 text-primary/60 text-sm uppercase tracking-wider mb-4 px-4">
+                    <div className="col-span-2">{section.label || 'Untitled'}</div>
+                    <div>{section.section_id}</div>
+                    <div></div>
                   </div>
-                </div>
-                
-                {/* Project Thumbnail */}
-                <div className="aspect-[21/9] bg-gradient-to-br from-muted to-background rounded-lg border border-primary/20 hover:border-accent/50 transition-all duration-500 overflow-hidden group-hover:scale-[1.02]">
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-primary/30 text-lg tracking-wider">PROJECT PREVIEW</span>
+
+                  {/* Media */}
+                  <div className="aspect-[21/9] bg-gradient-to-br from-muted to-background rounded-lg border border-primary/20 hover:border-accent/50 transition-all duration-500 overflow-hidden group-hover:scale-[1.02]">
+                    {section.content_type === 'vimeo_url' && section.text_value ? (
+                      <iframe
+                        src={section.text_value}
+                        className="w-full h-full"
+                        style={{ border: 0 }}
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        title={section.label}
+                      />
+                    ) : section.content_type === 'video' && section.media_url ? (
+                      <video
+                        src={section.media_url}
+                        className="w-full h-full object-cover"
+                        controls
+                      />
+                    ) : section.media_url ? (
+                      <img
+                        src={section.media_url}
+                        alt={section.label}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-primary/30 text-lg tracking-wider">
+                          PROJECT PREVIEW
+                        </span>
+                      </div>
+                    )}
                   </div>
+
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
+
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

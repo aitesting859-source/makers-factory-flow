@@ -1,0 +1,125 @@
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { usePageContent } from '@/hooks/usePageContent';
+
+const ScrollAnimatedTitle = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const { sections } = usePageContent('homepage');
+  const getText = (id: string): string =>
+    sections?.find((s: any) => s.section_id === id)?.text_value || '';
+
+  const subtitle = getText('about-subtitle') || '(Indie - Video Creators)';
+  const desc1 = getText('about-desc-1') || 'We are a collective of indie creators pushing the boundaries of visual storytelling.';
+  const desc2 = getText('about-desc-2') || 'Our work spans media production, commercial advertising, fashion editorial, and wedding cinematography.';
+  const desc3 = getText('about-desc-3') || 'Each project is an opportunity to create something extraordinary.';
+
+  // ── Scroll ranges ──
+  // Scroll 1: 0.00 → 0.25  →  THE moves up-left, shrinks
+  // Scroll 2: 0.25 → 0.50  →  MAKERS moves up, shrinks
+  // Scroll 3: 0.50 → 0.75  →  FACTORY moves up-right, shrinks
+  // Scroll 4: 0.75 → 1.00  →  content fades in
+
+  // ── THE ──
+  const theY     = useTransform(scrollYProgress, [0, 0.25], ['0px', '-45vh']);
+  const theX     = useTransform(scrollYProgress, [0, 0.25], ['0px', '-25vw']);
+  const theScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.35]);
+
+  // ── MAKERS ──
+  const makersY     = useTransform(scrollYProgress, [0, 0.25, 0.5], ['0px', '0px', '-40vh']);
+  const makersScale = useTransform(scrollYProgress, [0, 0.25, 0.5], [1, 1, 0.38]);
+
+  // ── FACTORY ──
+  const factoryY     = useTransform(scrollYProgress, [0, 0.5, 0.75], ['0px', '0px', '-35vh']);
+  const factoryX     = useTransform(scrollYProgress, [0, 0.5, 0.75], ['0px', '0px', '25vw']);
+  const factoryScale = useTransform(scrollYProgress, [0, 0.5, 0.75], [1, 1, 0.35]);
+
+  // ── CONTENT ──
+  const contentOp = useTransform(scrollYProgress, [0.75, 1], [0, 1]);
+  const contentY  = useTransform(scrollYProgress, [0.75, 1], ['40px', '0px']);
+
+  return (
+    <div ref={containerRef} className="relative min-h-[400vh]">
+      {/* STICKY — stays on screen while scrolling */}
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
+
+        {/* THE MAKERS FACTORY — one line, centered, visible on load */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="flex flex-row items-baseline justify-center gap-[1.5vw]">
+
+            {/* THE */}
+            <motion.span
+              className="font-black tracking-tighter text-primary/70 select-none whitespace-nowrap"
+              style={{
+                fontSize: '8vw',
+                y: theY,
+                x: theX,
+                scale: theScale,
+                transformOrigin: 'center center',
+              }}
+            >
+              THE
+            </motion.span>
+
+            {/* MAKERS */}
+            <motion.span
+              className="font-black tracking-tighter text-primary select-none whitespace-nowrap"
+              style={{
+                fontSize: '10vw',
+                y: makersY,
+                scale: makersScale,
+                transformOrigin: 'center center',
+              }}
+            >
+              MAKERS
+            </motion.span>
+
+            {/* FACTORY */}
+            <motion.span
+              className="font-black tracking-tighter text-accent select-none whitespace-nowrap"
+              style={{
+                fontSize: '8vw',
+                y: factoryY,
+                x: factoryX,
+                scale: factoryScale,
+                transformOrigin: 'center center',
+              }}
+            >
+              FACTORY
+            </motion.span>
+
+          </div>
+        </div>
+
+        {/* CONTENT — fades in on 4th scroll */}
+        <motion.div
+          className="absolute bottom-24 w-full max-w-3xl px-8 text-center space-y-4 left-1/2 -translate-x-1/2"
+          style={{
+            opacity: contentOp,
+            y: contentY,
+          }}
+        >
+          <p className="text-xs sm:text-sm md:text-base text-primary/60 tracking-wider uppercase">
+            {subtitle}
+          </p>
+          <p className="text-sm sm:text-base md:text-lg text-primary/80 leading-relaxed font-light">
+            {desc1}
+          </p>
+          <p className="text-sm sm:text-base md:text-lg text-primary/80 leading-relaxed font-light">
+            {desc2}
+          </p>
+          <p className="text-sm sm:text-base md:text-lg text-primary/80 leading-relaxed font-light">
+            {desc3}
+          </p>
+        </motion.div>
+
+      </div>
+    </div>
+  );
+};
+
+export default ScrollAnimatedTitle;

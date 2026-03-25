@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
@@ -6,6 +7,10 @@ import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+
+const SERVICE_ID = 'service_bqquc2x';
+const TEMPLATE_ID = 'template_9jea2ja';
+const PUBLIC_KEY = 'BUHLsbqOkGQ9_NITI';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -27,15 +32,37 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!date) {
+      toast.error('Please select a preferred date.');
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      toast.success('Thank you! We\'ll get back to you soon.');
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          date: format(date, 'PPP'),
+        },
+        PUBLIC_KEY
+      );
+
+      toast.success("Thank you! We'll get back to you soon.");
       setFormData({ name: '', email: '', phone: '', service: '' });
       setDate(undefined);
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast.error('Something went wrong. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -57,6 +84,7 @@ const ContactForm = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+
         {/* Name */}
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-primary/80 mb-2 uppercase tracking-wider">
@@ -161,14 +189,15 @@ const ContactForm = () => {
           </Popover>
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <button
           type="submit"
           disabled={isSubmitting}
           className="w-full px-8 py-4 bg-accent text-white rounded-lg text-lg font-bold hover:bg-accent/90 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? 'Submitting...' : 'Submit Request'}
+          {isSubmitting ? 'Sending...' : 'Submit Request'}
         </button>
+
       </form>
     </div>
   );
